@@ -1,73 +1,65 @@
 import os
 from PyPDF2 import PdfReader, PdfWriter
-import glob
+import traceback
 
-def split_pdf(pdf_path):
+def split_pdf(input_path, output_dir):
+    """PDF dosyasını sayfalara böler"""
     try:
-        # PDF dosyasının adını al (uzantısız)
-        pdf_name = os.path.splitext(os.path.basename(pdf_path))[0]
+        print(f"PDF bölme işlemi başlıyor...")
+        print(f"Girdi dosyası: {input_path}")
+        print(f"Çıktı klasörü: {output_dir}")
         
-        # PDF dosyasını oku
-        reader = PdfReader(pdf_path)
-        
-        # PDF adıyla yeni bir klasör oluştur
-        output_dir = pdf_name
+        # Girdi dosyasının varlığını kontrol et
+        if not os.path.exists(input_path):
+            raise Exception(f"Girdi dosyası bulunamadı: {input_path}")
+            
+        # Çıktı klasörünün varlığını kontrol et
         if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
+            raise Exception(f"Çıktı klasörü bulunamadı: {output_dir}")
+            
+        # PDF dosyasını aç
+        reader = PdfReader(input_path)
+        num_pages = len(reader.pages)
+        print(f"Toplam sayfa sayısı: {num_pages}")
         
-        # Her sayfayı ayrı bir PDF olarak kaydet
-        for page_num in range(len(reader.pages)):
+        # Her sayfayı ayrı PDF olarak kaydet
+        for page_num in range(num_pages):
             writer = PdfWriter()
             writer.add_page(reader.pages[page_num])
             
-            # Çıktı dosya adını oluştur (örn: klasor_adi/sayfa_1.pdf)
-            output_path = os.path.join(output_dir, f'sayfa_{page_num + 1}.pdf')
+            # Çıktı dosya adını oluştur
+            pdf_name = os.path.splitext(os.path.basename(input_path))[0]
+            output_path = os.path.join(output_dir, f'{pdf_name}_sayfa_{page_num + 1}.pdf')
+            print(f"Sayfa {page_num + 1} kaydediliyor: {output_path}")
             
             # PDF'i kaydet
             with open(output_path, 'wb') as output_file:
                 writer.write(output_file)
-            
-            print(f'{pdf_name} - Sayfa {page_num + 1} kaydedildi: {output_path}')
+                
+            # Dosyanın başarıyla oluşturulduğunu kontrol et
+            if not os.path.exists(output_path):
+                raise Exception(f"Sayfa {page_num + 1} kaydedilemedi: {output_path}")
+                
+            print(f"Sayfa {page_num + 1} başarıyla kaydedildi")
         
-        print(f'✓ {pdf_name} başarıyla işlendi.')
+        print("PDF bölme işlemi tamamlandı")
         return True
+        
     except Exception as e:
-        print(f'✗ {pdf_name} işlenirken hata oluştu: {str(e)}')
+        print(f"Hata oluştu: {str(e)}")
+        print(f"Hata detayı: {traceback.format_exc()}")
         return False
-
-def process_all_pdfs(directory_path):
-    # Belirtilen dizindeki tüm PDF dosyalarını bul
-    pdf_files = glob.glob(os.path.join(directory_path, '*.pdf'))
-    
-    if not pdf_files:
-        print(f'"{directory_path}" dizininde PDF dosyası bulunamadı!')
-        return
-    
-    print(f'Toplam {len(pdf_files)} PDF dosyası bulundu.')
-    print('İşlem başlıyor...\n')
-    
-    # Başarılı ve başarısız işlem sayılarını takip et
-    successful = 0
-    failed = 0
-    
-    # Her PDF dosyasını işle
-    for pdf_file in pdf_files:
-        if split_pdf(pdf_file):
-            successful += 1
-        else:
-            failed += 1
-    
-    print('\nİşlem tamamlandı!')
-    print(f'Toplam işlenen: {len(pdf_files)}')
-    print(f'Başarılı: {successful}')
-    print(f'Başarısız: {failed}')
 
 if __name__ == '__main__':
     # Kullanıcıdan dizin yolunu al
     directory_path = input('PDF dosyalarının bulunduğu dizinin yolunu girin: ')
+    output_dir = input('Bölünen dosyaların kaydedileceği dizinin yolunu girin: ')
     
-    # Dizin yolunun geçerli olup olmadığını kontrol et
+    # Dizin yollarının geçerli olup olmadığını kontrol et
     if os.path.exists(directory_path) and os.path.isdir(directory_path):
-        process_all_pdfs(directory_path)
+        if os.path.exists(output_dir) and os.path.isdir(output_dir):
+            split_pdf(directory_path, output_dir)
+        else:
+            print('Geçersiz çıktı dizin yolu! Lütfen var olan bir dizin yolu girin.')
     else:
-        print('Geçersiz dizin yolu! Lütfen var olan bir dizin yolu girin.') 
+        print('Geçersiz giriş dizin yolu! Lütfen var olan bir dizin yolu girin.') 
