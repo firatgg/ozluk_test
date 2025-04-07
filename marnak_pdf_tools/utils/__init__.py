@@ -1,0 +1,3 @@
+"""
+Yardımcı işlevleri içeren modül.
+""" 

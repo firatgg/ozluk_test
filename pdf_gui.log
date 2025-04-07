@@ -346,3 +346,353 @@ Traceback (most recent call last):
   File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 921, in rename_pdfs
     raise Exception("Hiçbir PDF dosyasý oluþturulamadý!")
 Exception: Hiçbir PDF dosyasý oluþturulamadý!
+2025-04-07 08:44:39,119 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [adli sicil kaydý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [adli sicil kaydý].pdf
+2025-04-07 08:44:39,120 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [aile durum bildirimi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [aile durum bildirimi].pdf
+2025-04-07 08:44:39,120 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf
+2025-04-07 08:44:39,120 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid eðitim belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [covid eðitim belgesi].pdf
+2025-04-07 08:44:39,120 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid kontrol listesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [covid kontrol listesi].pdf
+2025-04-07 08:44:39,121 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [diploma].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [diploma].pdf
+2025-04-07 08:44:39,121 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [eðitim katlým formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [eðitim katlým formu].pdf
+2025-04-07 08:44:39,121 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ehliyet].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [ehliyet].pdf
+2025-04-07 08:44:39,121 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf
+2025-04-07 08:44:39,121 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [fotoðraf].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [fotoðraf].pdf
+2025-04-07 08:44:39,121 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ikametgah].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [ikametgah].pdf
+2025-04-07 08:44:39,122 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,122 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf
+2025-04-07 08:44:39,122 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,122 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,122 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [istirahat belgesi].pdf
+2025-04-07 08:44:39,122 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [istirahat raporu].pdf
+2025-04-07 08:44:39,123 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [kimlik].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [kimlik].pdf
+2025-04-07 08:44:39,123 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [mezun belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [mezun belgesi].pdf
+2025-04-07 08:44:39,123 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [personel bilgi formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [personel bilgi formu].pdf
+2025-04-07 08:44:39,123 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf
+2025-04-07 08:44:39,123 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [saðlýk raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [saðlýk raporu].pdf
+2025-04-07 08:44:39,124 - INFO - Dosya taþýndý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [transkript].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Ayfer Kaymakçý [transkript].pdf
+2025-04-07 08:44:39,126 - INFO - Dosya iþlendi: Ayfer Kaymakçý [adli sicil kaydý].pdf
+2025-04-07 08:44:39,126 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [adli sicil kaydý].pdf
+2025-04-07 08:44:39,126 - INFO - Yeni isim: aa_1.pdf
+2025-04-07 08:44:39,128 - INFO - Dosya iþlendi: Ayfer Kaymakçý [aile durum bildirimi].pdf
+2025-04-07 08:44:39,128 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [aile durum bildirimi].pdf
+2025-04-07 08:44:39,128 - INFO - Yeni isim: aa_2.pdf
+2025-04-07 08:44:39,131 - INFO - Dosya iþlendi: Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf
+2025-04-07 08:44:39,131 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf
+2025-04-07 08:44:39,131 - INFO - Yeni isim: aa_3.pdf
+2025-04-07 08:44:39,132 - INFO - Dosya iþlendi: Ayfer Kaymakçý [covid eðitim belgesi].pdf
+2025-04-07 08:44:39,132 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid eðitim belgesi].pdf
+2025-04-07 08:44:39,132 - INFO - Yeni isim: aa_4.pdf
+2025-04-07 08:44:39,133 - INFO - Dosya iþlendi: Ayfer Kaymakçý [covid kontrol listesi].pdf
+2025-04-07 08:44:39,133 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid kontrol listesi].pdf
+2025-04-07 08:44:39,133 - INFO - Yeni isim: aa_5.pdf
+2025-04-07 08:44:39,134 - INFO - Dosya iþlendi: Ayfer Kaymakçý [diploma].pdf
+2025-04-07 08:44:39,134 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [diploma].pdf
+2025-04-07 08:44:39,134 - INFO - Yeni isim: aa_6.pdf
+2025-04-07 08:44:39,135 - INFO - Dosya iþlendi: Ayfer Kaymakçý [eðitim katlým formu].pdf
+2025-04-07 08:44:39,135 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [eðitim katlým formu].pdf
+2025-04-07 08:44:39,135 - INFO - Yeni isim: aa_7.pdf
+2025-04-07 08:44:39,136 - INFO - Dosya iþlendi: Ayfer Kaymakçý [ehliyet].pdf
+2025-04-07 08:44:39,136 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ehliyet].pdf
+2025-04-07 08:44:39,137 - INFO - Yeni isim: aa_8.pdf
+2025-04-07 08:44:39,138 - INFO - Dosya iþlendi: Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf
+2025-04-07 08:44:39,138 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf
+2025-04-07 08:44:39,138 - INFO - Yeni isim: aa_9.pdf
+2025-04-07 08:44:39,138 - INFO - Dosya iþlendi: Ayfer Kaymakçý [fotoðraf].pdf
+2025-04-07 08:44:39,138 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [fotoðraf].pdf
+2025-04-07 08:44:39,139 - INFO - Yeni isim: aa_10.pdf
+2025-04-07 08:44:39,139 - INFO - Dosya iþlendi: Ayfer Kaymakçý [ikametgah].pdf
+2025-04-07 08:44:39,139 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ikametgah].pdf
+2025-04-07 08:44:39,139 - INFO - Yeni isim: aa_11.pdf
+2025-04-07 08:44:39,141 - INFO - Dosya iþlendi: Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,141 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,141 - INFO - Yeni isim: aa_12.pdf
+2025-04-07 08:44:39,143 - INFO - Dosya iþlendi: Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf
+2025-04-07 08:44:39,143 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf
+2025-04-07 08:44:39,143 - INFO - Yeni isim: aa_13.pdf
+2025-04-07 08:44:39,145 - INFO - Dosya iþlendi: Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,145 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,145 - INFO - Yeni isim: aa_14.pdf
+2025-04-07 08:44:39,147 - INFO - Dosya iþlendi: Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,147 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:44:39,147 - INFO - Yeni isim: aa_15.pdf
+2025-04-07 08:44:39,148 - INFO - Dosya iþlendi: Ayfer Kaymakçý [istirahat belgesi].pdf
+2025-04-07 08:44:39,148 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat belgesi].pdf
+2025-04-07 08:44:39,148 - INFO - Yeni isim: aa_16.pdf
+2025-04-07 08:44:39,148 - INFO - Dosya iþlendi: Ayfer Kaymakçý [istirahat raporu].pdf
+2025-04-07 08:44:39,148 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat raporu].pdf
+2025-04-07 08:44:39,148 - INFO - Yeni isim: aa_17.pdf
+2025-04-07 08:44:39,149 - INFO - Dosya iþlendi: Ayfer Kaymakçý [kimlik].pdf
+2025-04-07 08:44:39,149 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [kimlik].pdf
+2025-04-07 08:44:39,150 - INFO - Yeni isim: aa_18.pdf
+2025-04-07 08:44:39,151 - INFO - Dosya iþlendi: Ayfer Kaymakçý [mezun belgesi].pdf
+2025-04-07 08:44:39,151 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [mezun belgesi].pdf
+2025-04-07 08:44:39,151 - INFO - Yeni isim: aa_19.pdf
+2025-04-07 08:44:39,152 - INFO - Dosya iþlendi: Ayfer Kaymakçý [personel bilgi formu].pdf
+2025-04-07 08:44:39,152 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [personel bilgi formu].pdf
+2025-04-07 08:44:39,152 - INFO - Yeni isim: aa_20.pdf
+2025-04-07 08:44:39,153 - INFO - Dosya iþlendi: Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf
+2025-04-07 08:44:39,153 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf
+2025-04-07 08:44:39,153 - INFO - Yeni isim: aa_21.pdf
+2025-04-07 08:44:39,154 - INFO - Dosya iþlendi: Ayfer Kaymakçý [saðlýk raporu].pdf
+2025-04-07 08:44:39,154 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [saðlýk raporu].pdf
+2025-04-07 08:44:39,154 - INFO - Yeni isim: aa_22.pdf
+2025-04-07 08:44:39,155 - INFO - Dosya iþlendi: Ayfer Kaymakçý [transkript].pdf
+2025-04-07 08:44:39,155 - INFO - Orijinal kopya: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [transkript].pdf
+2025-04-07 08:44:39,155 - INFO - Yeni isim: aa_23.pdf
+2025-04-07 08:44:39,160 - ERROR - Yeniden adlandýrma hatasý: Hiçbir PDF dosyasý oluþturulamadý!
+Traceback (most recent call last):
+  File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 934, in rename_pdfs
+    raise e
+  File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 920, in rename_pdfs
+    raise Exception("Hiçbir PDF dosyasý oluþturulamadý!")
+Exception: Hiçbir PDF dosyasý oluþturulamadý!
+2025-04-07 08:51:04,270 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [adli sicil kaydý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [adli sicil kaydý].pdf
+2025-04-07 08:51:04,272 - INFO - Yeni dosya oluþturuldu: test_1.pdf
+2025-04-07 08:51:04,275 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [aile durum bildirimi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [aile durum bildirimi].pdf
+2025-04-07 08:51:04,278 - INFO - Yeni dosya oluþturuldu: test_2.pdf
+2025-04-07 08:51:04,281 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf
+2025-04-07 08:51:04,284 - INFO - Yeni dosya oluþturuldu: test_3.pdf
+2025-04-07 08:51:04,286 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid eðitim belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid eðitim belgesi].pdf
+2025-04-07 08:51:04,287 - INFO - Yeni dosya oluþturuldu: test_4.pdf
+2025-04-07 08:51:04,288 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid kontrol listesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid kontrol listesi].pdf
+2025-04-07 08:51:04,290 - INFO - Yeni dosya oluþturuldu: test_5.pdf
+2025-04-07 08:51:04,291 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [diploma].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [diploma].pdf
+2025-04-07 08:51:04,293 - INFO - Yeni dosya oluþturuldu: test_6.pdf
+2025-04-07 08:51:04,294 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [eðitim katlým formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [eðitim katlým formu].pdf
+2025-04-07 08:51:04,295 - INFO - Yeni dosya oluþturuldu: test_7.pdf
+2025-04-07 08:51:04,296 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ehliyet].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ehliyet].pdf
+2025-04-07 08:51:04,297 - INFO - Yeni dosya oluþturuldu: test_8.pdf
+2025-04-07 08:51:04,299 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf
+2025-04-07 08:51:04,301 - INFO - Yeni dosya oluþturuldu: test_9.pdf
+2025-04-07 08:51:04,302 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [fotoðraf].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [fotoðraf].pdf
+2025-04-07 08:51:04,303 - INFO - Yeni dosya oluþturuldu: test_10.pdf
+2025-04-07 08:51:04,304 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ikametgah].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ikametgah].pdf
+2025-04-07 08:51:04,305 - INFO - Yeni dosya oluþturuldu: test_11.pdf
+2025-04-07 08:51:04,306 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf
+2025-04-07 08:51:04,307 - INFO - Yeni dosya oluþturuldu: test_12.pdf
+2025-04-07 08:51:04,309 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf
+2025-04-07 08:51:04,311 - INFO - Yeni dosya oluþturuldu: test_13.pdf
+2025-04-07 08:51:04,313 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:51:04,315 - INFO - Yeni dosya oluþturuldu: test_14.pdf
+2025-04-07 08:51:04,316 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:51:04,318 - INFO - Yeni dosya oluþturuldu: test_15.pdf
+2025-04-07 08:51:04,319 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat belgesi].pdf
+2025-04-07 08:51:04,320 - INFO - Yeni dosya oluþturuldu: test_16.pdf
+2025-04-07 08:51:04,321 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat raporu].pdf
+2025-04-07 08:51:04,322 - INFO - Yeni dosya oluþturuldu: test_17.pdf
+2025-04-07 08:51:04,323 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [kimlik].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [kimlik].pdf
+2025-04-07 08:51:04,324 - INFO - Yeni dosya oluþturuldu: test_18.pdf
+2025-04-07 08:51:04,325 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [mezun belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [mezun belgesi].pdf
+2025-04-07 08:51:04,326 - INFO - Yeni dosya oluþturuldu: test_19.pdf
+2025-04-07 08:51:04,327 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [personel bilgi formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [personel bilgi formu].pdf
+2025-04-07 08:51:04,328 - INFO - Yeni dosya oluþturuldu: test_20.pdf
+2025-04-07 08:51:04,330 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf
+2025-04-07 08:51:04,332 - INFO - Yeni dosya oluþturuldu: test_21.pdf
+2025-04-07 08:51:04,333 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [saðlýk raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [saðlýk raporu].pdf
+2025-04-07 08:51:04,333 - INFO - Yeni dosya oluþturuldu: test_22.pdf
+2025-04-07 08:51:04,335 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [transkript].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [transkript].pdf
+2025-04-07 08:51:04,336 - INFO - Yeni dosya oluþturuldu: test_23.pdf
+2025-04-07 08:51:04,340 - ERROR - Yeniden adlandýrma hatasý: Hiçbir PDF dosyasý oluþturulamadý!
+Traceback (most recent call last):
+  File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 920, in rename_pdfs
+    raise e
+  File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 906, in rename_pdfs
+    raise Exception("Hiçbir PDF dosyasý oluþturulamadý!")
+Exception: Hiçbir PDF dosyasý oluþturulamadý!
+2025-04-07 08:52:08,806 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [adli sicil kaydý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [adli sicil kaydý].pdf
+2025-04-07 08:52:08,808 - INFO - Yeni dosya oluþturuldu: test_1.pdf
+2025-04-07 08:52:08,810 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [aile durum bildirimi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [aile durum bildirimi].pdf
+2025-04-07 08:52:08,812 - INFO - Yeni dosya oluþturuldu: test_2.pdf
+2025-04-07 08:52:08,815 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf
+2025-04-07 08:52:08,818 - INFO - Yeni dosya oluþturuldu: test_3.pdf
+2025-04-07 08:52:08,820 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid eðitim belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid eðitim belgesi].pdf
+2025-04-07 08:52:08,822 - INFO - Yeni dosya oluþturuldu: test_4.pdf
+2025-04-07 08:52:08,823 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid kontrol listesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid kontrol listesi].pdf
+2025-04-07 08:52:08,825 - INFO - Yeni dosya oluþturuldu: test_5.pdf
+2025-04-07 08:52:08,826 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [diploma].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [diploma].pdf
+2025-04-07 08:52:08,828 - INFO - Yeni dosya oluþturuldu: test_6.pdf
+2025-04-07 08:52:08,829 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [eðitim katlým formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [eðitim katlým formu].pdf
+2025-04-07 08:52:08,831 - INFO - Yeni dosya oluþturuldu: test_7.pdf
+2025-04-07 08:52:08,832 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ehliyet].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ehliyet].pdf
+2025-04-07 08:52:08,833 - INFO - Yeni dosya oluþturuldu: test_8.pdf
+2025-04-07 08:52:08,835 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf
+2025-04-07 08:52:08,836 - INFO - Yeni dosya oluþturuldu: test_9.pdf
+2025-04-07 08:52:08,837 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [fotoðraf].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [fotoðraf].pdf
+2025-04-07 08:52:08,838 - INFO - Yeni dosya oluþturuldu: test_10.pdf
+2025-04-07 08:52:08,839 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ikametgah].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ikametgah].pdf
+2025-04-07 08:52:08,840 - INFO - Yeni dosya oluþturuldu: test_11.pdf
+2025-04-07 08:52:08,842 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf
+2025-04-07 08:52:08,844 - INFO - Yeni dosya oluþturuldu: test_12.pdf
+2025-04-07 08:52:08,845 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf
+2025-04-07 08:52:08,847 - INFO - Yeni dosya oluþturuldu: test_13.pdf
+2025-04-07 08:52:08,849 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:52:08,851 - INFO - Yeni dosya oluþturuldu: test_14.pdf
+2025-04-07 08:52:08,852 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:52:08,854 - INFO - Yeni dosya oluþturuldu: test_15.pdf
+2025-04-07 08:52:08,855 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat belgesi].pdf
+2025-04-07 08:52:08,856 - INFO - Yeni dosya oluþturuldu: test_16.pdf
+2025-04-07 08:52:08,858 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat raporu].pdf
+2025-04-07 08:52:08,859 - INFO - Yeni dosya oluþturuldu: test_17.pdf
+2025-04-07 08:52:08,860 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [kimlik].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [kimlik].pdf
+2025-04-07 08:52:08,861 - INFO - Yeni dosya oluþturuldu: test_18.pdf
+2025-04-07 08:52:08,862 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [mezun belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [mezun belgesi].pdf
+2025-04-07 08:52:08,863 - INFO - Yeni dosya oluþturuldu: test_19.pdf
+2025-04-07 08:52:08,864 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [personel bilgi formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [personel bilgi formu].pdf
+2025-04-07 08:52:08,865 - INFO - Yeni dosya oluþturuldu: test_20.pdf
+2025-04-07 08:52:08,867 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf
+2025-04-07 08:52:08,869 - INFO - Yeni dosya oluþturuldu: test_21.pdf
+2025-04-07 08:52:08,870 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [saðlýk raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [saðlýk raporu].pdf
+2025-04-07 08:52:08,871 - INFO - Yeni dosya oluþturuldu: test_22.pdf
+2025-04-07 08:52:08,872 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [transkript].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [transkript].pdf
+2025-04-07 08:52:08,873 - INFO - Yeni dosya oluþturuldu: test_23.pdf
+2025-04-07 08:52:08,878 - ERROR - Yeniden adlandýrma hatasý: Hiçbir PDF dosyasý oluþturulamadý!
+Traceback (most recent call last):
+  File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 943, in rename_pdfs
+    raise e
+  File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 929, in rename_pdfs
+    raise Exception("Hiçbir PDF dosyasý oluþturulamadý!")
+Exception: Hiçbir PDF dosyasý oluþturulamadý!
+2025-04-07 08:53:15,803 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [adli sicil kaydý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [adli sicil kaydý].pdf
+2025-04-07 08:53:15,804 - INFO - Yeni dosya oluþturuldu: test_1.pdf
+2025-04-07 08:53:15,807 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [aile durum bildirimi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [aile durum bildirimi].pdf
+2025-04-07 08:53:15,810 - INFO - Yeni dosya oluþturuldu: test_2.pdf
+2025-04-07 08:53:15,813 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf
+2025-04-07 08:53:15,816 - INFO - Yeni dosya oluþturuldu: test_3.pdf
+2025-04-07 08:53:15,817 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid eðitim belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid eðitim belgesi].pdf
+2025-04-07 08:53:15,819 - INFO - Yeni dosya oluþturuldu: test_4.pdf
+2025-04-07 08:53:15,820 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid kontrol listesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid kontrol listesi].pdf
+2025-04-07 08:53:15,823 - INFO - Yeni dosya oluþturuldu: test_5.pdf
+2025-04-07 08:53:15,824 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [diploma].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [diploma].pdf
+2025-04-07 08:53:15,825 - INFO - Yeni dosya oluþturuldu: test_6.pdf
+2025-04-07 08:53:15,827 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [eðitim katlým formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [eðitim katlým formu].pdf
+2025-04-07 08:53:15,828 - INFO - Yeni dosya oluþturuldu: test_7.pdf
+2025-04-07 08:53:15,829 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ehliyet].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ehliyet].pdf
+2025-04-07 08:53:15,830 - INFO - Yeni dosya oluþturuldu: test_8.pdf
+2025-04-07 08:53:15,832 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf
+2025-04-07 08:53:15,833 - INFO - Yeni dosya oluþturuldu: test_9.pdf
+2025-04-07 08:53:15,834 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [fotoðraf].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [fotoðraf].pdf
+2025-04-07 08:53:15,835 - INFO - Yeni dosya oluþturuldu: test_10.pdf
+2025-04-07 08:53:15,836 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ikametgah].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ikametgah].pdf
+2025-04-07 08:53:15,838 - INFO - Yeni dosya oluþturuldu: test_11.pdf
+2025-04-07 08:53:15,840 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf
+2025-04-07 08:53:15,842 - INFO - Yeni dosya oluþturuldu: test_12.pdf
+2025-04-07 08:53:15,844 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf
+2025-04-07 08:53:15,846 - INFO - Yeni dosya oluþturuldu: test_13.pdf
+2025-04-07 08:53:15,847 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:53:15,850 - INFO - Yeni dosya oluþturuldu: test_14.pdf
+2025-04-07 08:53:15,852 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:53:15,854 - INFO - Yeni dosya oluþturuldu: test_15.pdf
+2025-04-07 08:53:15,855 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat belgesi].pdf
+2025-04-07 08:53:15,856 - INFO - Yeni dosya oluþturuldu: test_16.pdf
+2025-04-07 08:53:15,857 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat raporu].pdf
+2025-04-07 08:53:15,858 - INFO - Yeni dosya oluþturuldu: test_17.pdf
+2025-04-07 08:53:15,860 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [kimlik].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [kimlik].pdf
+2025-04-07 08:53:15,860 - INFO - Yeni dosya oluþturuldu: test_18.pdf
+2025-04-07 08:53:15,861 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [mezun belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [mezun belgesi].pdf
+2025-04-07 08:53:15,862 - INFO - Yeni dosya oluþturuldu: test_19.pdf
+2025-04-07 08:53:15,863 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [personel bilgi formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [personel bilgi formu].pdf
+2025-04-07 08:53:15,864 - INFO - Yeni dosya oluþturuldu: test_20.pdf
+2025-04-07 08:53:15,866 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf
+2025-04-07 08:53:15,868 - INFO - Yeni dosya oluþturuldu: test_21.pdf
+2025-04-07 08:53:15,869 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [saðlýk raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [saðlýk raporu].pdf
+2025-04-07 08:53:15,871 - INFO - Yeni dosya oluþturuldu: test_22.pdf
+2025-04-07 08:53:15,872 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [transkript].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [transkript].pdf
+2025-04-07 08:53:15,874 - INFO - Yeni dosya oluþturuldu: test_23.pdf
+2025-04-07 08:57:59,780 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [adli sicil kaydý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [adli sicil kaydý].pdf
+2025-04-07 08:57:59,781 - INFO - Yeni dosya oluþturuldu: test_1.pdf
+2025-04-07 08:57:59,793 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [aile durum bildirimi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [aile durum bildirimi].pdf
+2025-04-07 08:57:59,795 - INFO - Yeni dosya oluþturuldu: test_2.pdf
+2025-04-07 08:57:59,797 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf
+2025-04-07 08:57:59,801 - INFO - Yeni dosya oluþturuldu: test_3.pdf
+2025-04-07 08:57:59,802 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid eðitim belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid eðitim belgesi].pdf
+2025-04-07 08:57:59,803 - INFO - Yeni dosya oluþturuldu: test_4.pdf
+2025-04-07 08:57:59,804 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [covid kontrol listesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid kontrol listesi].pdf
+2025-04-07 08:57:59,806 - INFO - Yeni dosya oluþturuldu: test_5.pdf
+2025-04-07 08:57:59,807 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [diploma].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [diploma].pdf
+2025-04-07 08:57:59,808 - INFO - Yeni dosya oluþturuldu: test_6.pdf
+2025-04-07 08:57:59,810 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [eðitim katlým formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [eðitim katlým formu].pdf
+2025-04-07 08:57:59,811 - INFO - Yeni dosya oluþturuldu: test_7.pdf
+2025-04-07 08:57:59,812 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ehliyet].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ehliyet].pdf
+2025-04-07 08:57:59,813 - INFO - Yeni dosya oluþturuldu: test_8.pdf
+2025-04-07 08:57:59,814 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf
+2025-04-07 08:57:59,816 - INFO - Yeni dosya oluþturuldu: test_9.pdf
+2025-04-07 08:57:59,817 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [fotoðraf].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [fotoðraf].pdf
+2025-04-07 08:57:59,817 - INFO - Yeni dosya oluþturuldu: test_10.pdf
+2025-04-07 08:57:59,818 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ikametgah].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ikametgah].pdf
+2025-04-07 08:57:59,819 - INFO - Yeni dosya oluþturuldu: test_11.pdf
+2025-04-07 08:57:59,821 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf
+2025-04-07 08:57:59,822 - INFO - Yeni dosya oluþturuldu: test_12.pdf
+2025-04-07 08:57:59,824 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf
+2025-04-07 08:57:59,825 - INFO - Yeni dosya oluþturuldu: test_13.pdf
+2025-04-07 08:57:59,827 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:57:59,829 - INFO - Yeni dosya oluþturuldu: test_14.pdf
+2025-04-07 08:57:59,831 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf
+2025-04-07 08:57:59,832 - INFO - Yeni dosya oluþturuldu: test_15.pdf
+2025-04-07 08:57:59,833 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat belgesi].pdf
+2025-04-07 08:57:59,834 - INFO - Yeni dosya oluþturuldu: test_16.pdf
+2025-04-07 08:57:59,835 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [istirahat raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat raporu].pdf
+2025-04-07 08:57:59,836 - INFO - Yeni dosya oluþturuldu: test_17.pdf
+2025-04-07 08:57:59,837 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [kimlik].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [kimlik].pdf
+2025-04-07 08:57:59,838 - INFO - Yeni dosya oluþturuldu: test_18.pdf
+2025-04-07 08:57:59,839 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [mezun belgesi].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [mezun belgesi].pdf
+2025-04-07 08:57:59,840 - INFO - Yeni dosya oluþturuldu: test_19.pdf
+2025-04-07 08:57:59,841 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [personel bilgi formu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [personel bilgi formu].pdf
+2025-04-07 08:57:59,842 - INFO - Yeni dosya oluþturuldu: test_20.pdf
+2025-04-07 08:57:59,844 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf
+2025-04-07 08:57:59,845 - INFO - Yeni dosya oluþturuldu: test_21.pdf
+2025-04-07 08:57:59,846 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [saðlýk raporu].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [saðlýk raporu].pdf
+2025-04-07 08:57:59,847 - INFO - Yeni dosya oluþturuldu: test_22.pdf
+2025-04-07 08:57:59,849 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/oz_pdf/ayfer_kaymakci/Ayfer Kaymakçý [transkript].pdf -> C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [transkript].pdf
+2025-04-07 08:57:59,850 - INFO - Yeni dosya oluþturuldu: test_23.pdf
+2025-04-07 08:57:59,858 - ERROR - Yeniden adlandýrma hatasý: Hiçbir PDF dosyasý oluþturulamadý!
+Traceback (most recent call last):
+  File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 952, in rename_pdfs
+    raise e
+  File "C:\Users\Fýrat Gültekin\Documents\GitHub\ozluk_test\pdf_gui.py", line 930, in rename_pdfs
+    raise Exception("Hiçbir PDF dosyasý oluþturulamadý!")
+Exception: Hiçbir PDF dosyasý oluþturulamadý!
+2025-04-07 09:00:08,526 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [adli sicil kaydý].pdf
+2025-04-07 09:00:08,527 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_1.pdf
+2025-04-07 09:00:08,529 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [aile durum bildirimi].pdf
+2025-04-07 09:00:08,530 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_2.pdf
+2025-04-07 09:00:08,533 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [belirsiz süreli iþ sözleþmesi].pdf
+2025-04-07 09:00:08,535 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_3.pdf
+2025-04-07 09:00:08,537 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid eðitim belgesi].pdf
+2025-04-07 09:00:08,537 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_4.pdf
+2025-04-07 09:00:08,539 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [covid kontrol listesi].pdf
+2025-04-07 09:00:08,540 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_5.pdf
+2025-04-07 09:00:08,541 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [diploma].pdf
+2025-04-07 09:00:08,542 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_6.pdf
+2025-04-07 09:00:08,543 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [eðitim katlým formu].pdf
+2025-04-07 09:00:08,544 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_7.pdf
+2025-04-07 09:00:08,545 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ehliyet].pdf
+2025-04-07 09:00:08,545 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_8.pdf
+2025-04-07 09:00:08,547 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [finans yöneticisi görve tanýmý].pdf
+2025-04-07 09:00:08,548 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_9.pdf
+2025-04-07 09:00:08,549 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [fotoðraf].pdf
+2025-04-07 09:00:08,549 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_10.pdf
+2025-04-07 09:00:08,550 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ikametgah].pdf
+2025-04-07 09:00:08,551 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_11.pdf
+2025-04-07 09:00:08,552 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 9001 temel ve dökümantasyon sertifika].pdf
+2025-04-07 09:00:08,554 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_12.pdf
+2025-04-07 09:00:08,555 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 19011 iç denetçi sertifika].pdf
+2025-04-07 09:00:08,556 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_13.pdf
+2025-04-07 09:00:08,558 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 27001 temel dökümantasyon sertifika].pdf
+2025-04-07 09:00:08,559 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_14.pdf
+2025-04-07 09:00:08,561 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [ISO 45001 temel dökümantasyon sertifika].pdf
+2025-04-07 09:00:08,563 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_15.pdf
+2025-04-07 09:00:08,564 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat belgesi].pdf
+2025-04-07 09:00:08,565 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_16.pdf
+2025-04-07 09:00:08,565 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [istirahat raporu].pdf
+2025-04-07 09:00:08,566 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_17.pdf
+2025-04-07 09:00:08,567 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [kimlik].pdf
+2025-04-07 09:00:08,568 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_18.pdf
+2025-04-07 09:00:08,569 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [mezun belgesi].pdf
+2025-04-07 09:00:08,570 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_19.pdf
+2025-04-07 09:00:08,571 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [personel bilgi formu].pdf
+2025-04-07 09:00:08,571 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_20.pdf
+2025-04-07 09:00:08,573 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [risk deðerlendirme sertifika].pdf
+2025-04-07 09:00:08,574 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_21.pdf
+2025-04-07 09:00:08,575 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [saðlýk raporu].pdf
+2025-04-07 09:00:08,576 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_22.pdf
+2025-04-07 09:00:08,577 - INFO - Orijinal dosya kopyalandý: C:/Users/Fýrat Gültekin/Desktop/pdf_test\Orijinal_Dosyalar\Ayfer Kaymakçý [transkript].pdf
+2025-04-07 09:00:08,578 - INFO - Yeni dosya oluþturuldu: C:/Users/Fýrat Gültekin/Desktop/pdf_test\test_23.pdf
