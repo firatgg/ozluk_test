@@ -157,27 +157,52 @@ BUTTON_STYLE = f"""
     }}
 """
 
-# İkincil düğme stili
-SECONDARY_BUTTON_STYLE = f"""
+# Birincil buton stili
+PRIMARY_BUTTON_STYLE = f"""
     QPushButton {{
-        background-color: {CORP_GRAY};
-        color: {CORP_TEXT};
-        border: 1px solid #CED0D4;
-        border-radius: 4px;
-        padding: 8px 16px;
+        background-color: {MARNAK_BLUE};
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 13px;
     }}
     QPushButton:hover {{
-        background-color: #E4E6E9;
+        background-color: #005599;
     }}
     QPushButton:pressed {{
-        background-color: #DADDE1;
+        background-color: #004477;
     }}
     QPushButton:disabled {{
-        background-color: #F5F6F7;
-        color: #BEC3C9;
-        border: 1px solid #DADDE1;
+        background-color: #CCCCCC;
+        color: #666666;
+    }}
+"""
+
+# İkincil buton stili
+SECONDARY_BUTTON_STYLE_OLD = f"""
+    QPushButton {{
+        background-color: {MARNAK_LIGHT_BLUE};
+        color: {MARNAK_BLUE};
+        border: 2px solid {MARNAK_BLUE};
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: bold;
+    }}
+    QPushButton:hover {{
+        background-color: #D5E6F3;
+        border-color: {MARNAK_GREEN};
+        color: {MARNAK_GREEN};
+    }}
+    QPushButton:pressed {{
+        background-color: #C5DBE8;
+    }}
+    QPushButton:disabled {{
+        background-color: #F5F5F5;
+        border-color: #CCCCCC;
+        color: #666666;
     }}
 """
 
@@ -530,3 +555,33 @@ STATUS_CARD_STYLE = f"""
         margin-top: 10px;
     }}
 """ 
+
+# HeaderLabel Stili
+HEADER_LABEL_STYLE = f"""
+    QLabel {{
+        color: {MARNAK_BLUE};
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+    }}
+"""
+
+# InfoLabel Stili
+INFO_LABEL_STYLE = f"""
+    QLabel {{
+        color: {MARNAK_BLUE};
+        font-size: 13px;
+        padding: 5px;
+    }}
+"""
+
+# ErrorLabel Stili
+ERROR_LABEL_STYLE_NEW = """
+    QLabel {
+        color: red;
+        font-size: 13px;
+        padding: 5px;
+    }
+"""
+
+# Mesaj kutuları ve diğer metinler 

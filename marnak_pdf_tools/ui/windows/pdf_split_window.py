@@ -69,8 +69,8 @@ class PDFSplitWindow(QWidget):
         self.update_options_ui()
         self.update_file_count()
         
-        # Pencere açıldığında DragDropWidget'a odak ver
-        QTimer.singleShot(100, self.drag_drop.setFocus)
+        # Pencere açıldığında DragDropWidget'a odak ver (Kaldırıldı)
+        # QTimer.singleShot(100, self.drag_drop.setFocus)
     
     def resizeEvent(self, event: QResizeEvent):
         """Yeniden boyutlandırma olayı"""
@@ -214,7 +214,7 @@ class PDFSplitWindow(QWidget):
         self.file_list = FileListWidget(selectable=True)
         self.file_list.setStyleSheet(FILE_LIST_STYLE)
         self.file_list.files_changed.connect(self.update_file_count)
-        self.file_list.files_removed.connect(self.refocus_drag_drop)
+        # self.file_list.files_removed.connect(self.refocus_drag_drop) # Kaldırıldı
         self.file_list.itemChanged.connect(self.check_item_state)
         file_layout.addWidget(self.file_list)
         
@@ -503,7 +503,7 @@ class PDFSplitWindow(QWidget):
         if total_files == 0:
             self.selected_count_label.setText("Dosya yok")
             # Liste boşaldığında DragDropWidget'a odak ver
-            self.refocus_drag_drop()
+            # self.refocus_drag_drop() # Kaldırıldı
         else:
             self.selected_count_label.setText(f"{selected_files}/{total_files} dosya seçili")
             
@@ -534,34 +534,30 @@ class PDFSplitWindow(QWidget):
             self.split_btn.setEnabled(False)
     
     def toggle_all_files(self, state):
-        """Tüm dosyaları seç/seçimi kaldır"""
-        # Sinyalleri geçici olarak kapat (döngü önleme)
-        self.file_list.blockSignals(True)
-        
-        # Qt.CheckState.Checked (2) veya Qt.CheckState.Unchecked (0) durumunu kontrol et
-        # state bazen int olarak geliyor, bazen Qt.CheckState olarak
-        if isinstance(state, int):
-            check_state = Qt.CheckState.Checked if state == 2 else Qt.CheckState.Unchecked
-        else:
-            check_state = state
-            
-        # Tüm öğeleri işaretle/işaretlerini kaldır
-        for i in range(self.file_list.count()):
-            item = self.file_list.item(i)
-            item.setCheckState(check_state)
-            
-        # Sinyalleri tekrar aç
-        self.file_list.blockSignals(False)
-        
-        # Dosya sayısını güncelle
-        self.update_file_count()
+        """Tüm dosyaları seç/işaretle veya seçimleri/işaretleri kaldır."""
+        try:
+            if state == Qt.CheckState.Checked.value:
+                self.file_list.check_all()
+            else:
+                self.file_list.uncheck_all()
+            self.update_file_count()
+        except Exception as e:
+            self.show_error(f"Dosyaların işaretlenme durumu değiştirilirken hata oluştu: {str(e)}")
     
     def add_files(self, file_paths):
         """Sürükle-bırak ile dosya ekler."""
-        for path in file_paths:
-            if path.lower().endswith('.pdf'):
-                self.file_list.add_file(path, checked=True)
-        self.update_file_count()
+        try:
+            # PDF dosyalarını filtrele
+            pdf_files = [f for f in file_paths if f.lower().endswith('.pdf')]
+            
+            if pdf_files:
+                # Dosyaları ekle
+                for pdf_file in pdf_files:
+                    self.file_list.add_file(pdf_file)
+                self.update_file_count() # Dosya sayısı güncellendi
+
+        except Exception as e:
+            self.show_error(f"Dosya eklenirken hata oluştu: {str(e)}")
     
     def get_selected_files(self):
         """Seçili/işaretli dosyaların listesini alır."""
@@ -570,53 +566,53 @@ class PDFSplitWindow(QWidget):
     
     def remove_checked_files(self):
         """İşaretli dosyaları listeden kaldırır."""
-        # Dosyaları kaldırmadan önce sayısını kontrol et
-        if self.file_list.count() == 0:
-            return
-            
-        # İşaretli dosyaları kaldır
-        self.file_list.remove_checked_files()
-        
-        # Dosya sayısını güncelle ve DragDrop'a odaklan
-        self.update_file_count()
-        self.refocus_drag_drop()
+        try:
+            self.file_list.remove_checked_files()
+            self.update_file_count()
+            # self.refocus_drag_drop() # Kaldırıldı
+        except Exception as e:
+            self.show_error(f"İşaretli dosyalar kaldırılırken hata oluştu: {str(e)}")
                 
     def select_files(self):
         """Dosya seçme dialogunu açar."""
-        files, _ = QFileDialog.getOpenFileNames(
-            self,
-            "PDF Dosyaları Seç",
-            "",
-            "PDF Dosyaları (*.pdf)"
-        )
-        
-        if files:
-            for file in files:
-                self.file_list.add_file(file, checked=True)
-            self.update_file_count()
+        try:
+            files, _ = QFileDialog.getOpenFileNames(
+                self,
+                "PDF Dosyası Seç",
+                "",
+                "PDF Dosyaları (*.pdf)"
+            )
+            
+            if files:
+                self.add_files(files)
+        except Exception as e:
+            self.show_error(f"Dosya seçilirken hata oluştu: {str(e)}")
     
     def select_output_dir(self):
         """Çıktı dizini seçme dialogunu açar."""
-        dir_path = QFileDialog.getExistingDirectory(
-            self,
-            "Çıktı Dizini Seç"
-        )
-        
-        if dir_path:
-            self.output_dir = dir_path
-            self.output_dir_label.setText(dir_path)
-            self.output_dir_label.setStyleSheet(INFO_BOX_STYLE)
+        try:
+            dir_path = QFileDialog.getExistingDirectory(
+                self,
+                "Çıktı Dizini Seç"
+            )
             
-            # Adım durumlarını güncelle
-            self.step1_label.setStyleSheet(INACTIVE_STEP_STYLE)
-            self.step2_label.setStyleSheet(INACTIVE_STEP_STYLE)
-            self.step3_label.setStyleSheet(ACTIVE_STEP_STYLE)
-            
-            # Dosya ve dizin seçildiyse, butonları etkinleştir
-            if self.file_list.count() > 0:
-                self.split_btn.setEnabled(True)
-            else:
-                self.split_btn.setEnabled(False)
+            if dir_path:
+                self.output_dir = dir_path
+                self.output_dir_label.setText(dir_path)
+                self.output_dir_label.setStyleSheet(INFO_BOX_STYLE)
+                
+                # Adım durumlarını güncelle
+                self.step1_label.setStyleSheet(INACTIVE_STEP_STYLE)
+                self.step2_label.setStyleSheet(INACTIVE_STEP_STYLE)
+                self.step3_label.setStyleSheet(ACTIVE_STEP_STYLE)
+                
+                # Dosya ve dizin seçildiyse, butonları etkinleştir
+                if self.file_list.count() > 0:
+                    self.split_btn.setEnabled(True)
+                else:
+                    self.split_btn.setEnabled(False)
+        except Exception as e:
+            self.show_error(f"Çıktı dizini seçilirken hata oluştu: {str(e)}")
         
     def get_split_options(self):
         """Kullanıcının seçtiği bölme seçeneklerini alır."""
@@ -885,31 +881,23 @@ class PDFSplitWindow(QWidget):
         """Pencere gösterildiğinde çağrılır."""
         super().showEvent(event)
         # Pencere her gösterildiğinde DragDropWidget'a odak ver
-        QTimer.singleShot(200, lambda: self.drag_drop.setFocus())
+        # QTimer.singleShot(200, lambda: self.drag_drop.setFocus()) # Kaldırıldı
         
         # Dosya sayısı durumunu güncelle
         self.update_file_count()
 
-    def refocus_drag_drop(self):
-        """DragDropWidget'a odak vermek için çağrılır."""
-        if not hasattr(self, 'drag_drop') or not self.isVisible():
-            return
-            
-        # Önce widget'ın güncellenmesini sağla
-        self.drag_drop.updateGeometry()
-        self.drag_drop.repaint()
+    # def refocus_drag_drop(self):
+    #     """DragDropWidget'a yeniden odak verir."""
+    #     # Eğer DragDropWidget görünür durumdaysa odak ver
+    #     if self.isVisible() and self.drag_drop.isVisible():
+    #         self.drag_drop.setFocus(Qt.FocusReason.OtherFocusReason)
+    #         print("PDF Split Window: DragDrop set focus")
         
-        # Kısa bir gecikme ile odak vermeyi dene (50ms)
-        QTimer.singleShot(50, self._set_focus_to_drag_drop)
-        # Daha uzun bir gecikme ile tekrar dene (ikinci şans)
-        QTimer.singleShot(250, self._set_focus_to_drag_drop)
-        
-    def _set_focus_to_drag_drop(self):
-        """DragDropWidget'a odak verme işlemi"""
-        if hasattr(self, 'drag_drop') and self.isVisible() and self.drag_drop.isVisible():
-            # Widget görünür ve ulaşılabilirse odak ver
-            self.drag_drop.setFocus(Qt.FocusReason.OtherFocusReason)
-            print("PDF Bölme: DragDrop'a odak verildi.")
+    # def _set_focus_to_drag_drop(self):
+    #     """DragDropWidget'a odak verme işlemi."""
+    #     if self.isVisible() and self.drag_drop.isVisible():
+    #         self.drag_drop.setFocus(Qt.FocusReason.OtherFocusReason)
+    #         print("PDF Split Window: DragDrop set focus (delayed)")
 
     def check_item_state(self, item):
         """Öğe işaretlendiğinde/işaret kaldırıldığında güncelle"""

@@ -3,12 +3,7 @@ Etiket bileşenleri.
 """
 from PyQt6.QtWidgets import QLabel
 from PyQt6.QtCore import Qt
-
-# Marnak Lojistik Kurumsal Renkleri
-MARNAK_BLUE = "#0066B3"
-MARNAK_GREEN = "#3AB54A"
-MARNAK_LIGHT_BLUE = "#E5F1F9"
-MARNAK_LIGHT_GREEN = "#E8F5EA"
+from ..styles import HEADER_LABEL_STYLE, INFO_LABEL_STYLE, ERROR_LABEL_STYLE_NEW
 
 class HeaderLabel(QLabel):
     """Başlık etiketi."""
@@ -21,14 +16,7 @@ class HeaderLabel(QLabel):
         """
         super().__init__(text, parent)
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.setStyleSheet(f"""
-            QLabel {{
-                color: {MARNAK_BLUE};
-                font-size: 18px;
-                font-weight: bold;
-                padding: 10px;
-            }}
-        """)
+        self.setStyleSheet(HEADER_LABEL_STYLE)
 
 class InfoLabel(QLabel):
     """Bilgi etiketi."""
@@ -42,13 +30,7 @@ class InfoLabel(QLabel):
         super().__init__(text, parent)
         self.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.setWordWrap(True)
-        self.setStyleSheet(f"""
-            QLabel {{
-                color: {MARNAK_BLUE};
-                font-size: 13px;
-                padding: 5px;
-            }}
-        """)
+        self.setStyleSheet(INFO_LABEL_STYLE)
 
 class ErrorLabel(QLabel):
     """Hata etiketi."""
@@ -62,10 +44,4 @@ class ErrorLabel(QLabel):
         super().__init__(text, parent)
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setWordWrap(True)
-        self.setStyleSheet("""
-            QLabel {
-                color: red;
-                font-size: 13px;
-                padding: 5px;
-            }
-        """) 
+        self.setStyleSheet(ERROR_LABEL_STYLE_NEW) 

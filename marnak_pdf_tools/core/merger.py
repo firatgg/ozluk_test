@@ -18,7 +18,7 @@ class PdfMerger:
     def merge_pdfs(self, 
                   file_paths: List[str], 
                   output_path: str,
-                  progress_callback: Optional[callable] = None) -> Tuple[bool, str]:
+                  progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """
         PDF dosyalarını birleştirir.
         
@@ -75,7 +75,7 @@ class PdfMerger:
             if self.logger:
                 self.logger.info(f"Birleştirme tamamlandı: {output_path}")
             
-            return True, "Birleştirme işlemi başarılı"
+            return True, "Birleştirme işlemi başarılı", [output_path]
             
         except Exception as e:
             error_msg = f"PDF birleştirme işlemi başarısız: {str(e)}"
@@ -89,4 +89,4 @@ class PdfMerger:
                 except:
                     pass
             
-            return False, error_msg 
+            return False, error_msg, [] 

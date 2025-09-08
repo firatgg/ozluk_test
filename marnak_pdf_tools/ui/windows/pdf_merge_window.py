@@ -52,8 +52,8 @@ class PDFMergeWindow(QWidget):
         # Başlangıç durumunu ayarla
         self.update_button_state()
         
-        # Pencere açıldığında DragDropWidget'a odak ver
-        QTimer.singleShot(100, self.drag_drop.setFocus)
+        # Pencere açıldığında DragDropWidget'a odak ver (Kaldırıldı)
+        # QTimer.singleShot(100, self.drag_drop.setFocus)
         
     def resizeEvent(self, event: QResizeEvent):
         """Yeniden boyutlandırma olayı"""
@@ -162,7 +162,7 @@ class PDFMergeWindow(QWidget):
         self.file_list.setStyleSheet(FILE_LIST_STYLE)
         self.file_list.setMinimumHeight(200)
         self.file_list.files_changed.connect(self.update_button_state)
-        self.file_list.files_removed.connect(self.refocus_drag_drop)
+        # self.file_list.files_removed.connect(self.refocus_drag_drop) # Kaldırıldı
         file_card_layout.addWidget(self.file_list)
         
         file_layout.addWidget(file_card)
@@ -275,143 +275,97 @@ class PDFMergeWindow(QWidget):
         
     def add_files(self, file_paths):
         """Sürükle-bırak ile dosya ekler."""
-        added_count = 0
-        for path in file_paths:
-            if path.lower().endswith('.pdf'):
-                self.file_list.add_file(path)
-                added_count += 1
-        
-        if added_count > 0:
-            # Dosya eklendiyse adım 2'ye geç
-            self.step1_label.setStyleSheet(INACTIVE_STEP_STYLE)
-            self.step2_label.setStyleSheet(ACTIVE_STEP_STYLE)
-        else:
-            # Dosya yoksa adım 1'de kal
-            self.step1_label.setStyleSheet(ACTIVE_STEP_STYLE)
-            self.step2_label.setStyleSheet(INACTIVE_STEP_STYLE)
+        try:
+            pdf_files = [f for f in file_paths if f.lower().endswith('.pdf')]
+            if pdf_files:
+                for pdf_file in pdf_files:
+                    self.file_list.add_file(pdf_file)
+                self.update_button_state()
+        except Exception as e:
+            self.handle_error(f"Dosya eklenirken hata oluştu: {str(e)}")
                 
     def select_files(self):
         """Dosya seçme dialogunu açar."""
-        files, _ = QFileDialog.getOpenFileNames(
-            self,
-            "PDF Dosyaları Seç",
-            "",
-            "PDF Dosyaları (*.pdf)"
-        )
+        try:
+            files, _ = QFileDialog.getOpenFileNames(
+                self,
+                "PDF Dosyaları Seç",
+                "",
+                "PDF Dosyaları (*.pdf)"
+            )
         
-        if files:
-            for file in files:
-                self.file_list.add_file(file)
-            
-            # Dosya seçildiyse adım 2'ye geç
-            self.step1_label.setStyleSheet(INACTIVE_STEP_STYLE)
-            self.step2_label.setStyleSheet(ACTIVE_STEP_STYLE)
+            if files:
+                self.add_files(files)
+        except Exception as e:
+            self.handle_error(f"Dosya seçilirken hata oluştu: {str(e)}")
                 
     def select_output_path(self):
-        """Çıktı dosyası yolunu seçme dialogunu açar."""
-        file_path, _ = QFileDialog.getSaveFileName(
+        """Çıktı dosyası seçim dialogunu açar."""
+        try:
+            files, _ = QFileDialog.getSaveFileName(
             self,
-            "Çıktı Dosyasını Kaydet",
+                "Birleştirilmiş PDF'i Kaydet",
             "",
-            "PDF Dosyası (*.pdf)"
+                "PDF Dosyaları (*.pdf)"
         )
         
-        if file_path:
-            # Uzantıyı kontrol et ve gerekirse ekle
-            if not file_path.lower().endswith('.pdf'):
-                file_path += '.pdf'
-                
-            self.output_path.setText(file_path)
-            
-            # Çıktı yolu ayarlandıysa adım 2'yi etkinleştir
-            if self.file_list.count() > 0:
-                self.step1_label.setStyleSheet(INACTIVE_STEP_STYLE)
-                self.step2_label.setStyleSheet(ACTIVE_STEP_STYLE)
-            
-            # Buton durumunu güncelle
+            if files:
+                self.output_path.setText(files)
             self.update_button_state()
+        except Exception as e:
+            self.handle_error(f"Çıktı dosyası seçilirken hata oluştu: {str(e)}")
             
     def process_merge(self):
         """PDF birleştirme işlemini başlatır."""
-        # Giriş ve çıkış dosyalarını kontrol et
-        if not self.output_path.text():
-            QMessageBox.warning(self, "Uyarı", "Lütfen çıkış dosyasını seçin.")
-            return
-
-        if self.file_list.count() == 0:
-            QMessageBox.warning(self, "Uyarı", "Lütfen en az bir PDF dosyası ekleyin.")
-            return
-
-        # Çıkış dizinini kontrol et
-        output_dir = os.path.dirname(self.output_path.text())
-        if output_dir and not os.path.exists(output_dir):
-            try:
-                os.makedirs(output_dir, exist_ok=True)
-            except Exception as e:
-                QMessageBox.critical(self, "Hata", f"Çıkış dizini oluşturulamadı: {str(e)}")
+        try:
+            files_to_merge = self.file_list.get_files()
+            output_path = self.output_path.text().strip()
+            
+            if not files_to_merge:
+                self.handle_error("Lütfen birleştirilecek PDF dosyalarını seçin.")
                 return
 
-        # Dosyaların geçerliliğini kontrol et
-        invalid_files = []
-        for file_path in self.file_list.get_files():
-            if not os.path.exists(file_path):
-                invalid_files.append(file_path)
-        
-        if invalid_files:
-            error_message = "Aşağıdaki dosyalar bulunamadı:\n"
-            for file in invalid_files[:5]:  # En fazla 5 dosya göster
-                try:
-                    file_name = os.path.basename(file)
-                except:
-                    file_name = str(file)
-                error_message += f"- {file_name}\n"
-            
-            if len(invalid_files) > 5:
-                error_message += f"... ve {len(invalid_files) - 5} dosya daha."
-            
-            QMessageBox.warning(self, "Uyarı", error_message)
-            return
-        
-        # Birleştirme işlemini onaylat
-        file_count = self.file_list.count()
-        output_file = self.output_path.text()
-        
-        confirm = QMessageBox.question(
-            self,
-            "Birleştirme İşlemini Onayla",
-            f"<b>{file_count}</b> PDF dosyası birleştirilecek.\n\n"
-            f"Çıktı dosyası: <b>{output_file}</b>\n\n"
-            f"İşleme devam etmek istiyor musunuz?",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.Yes
-        )
-        
-        if confirm != QMessageBox.StandardButton.Yes:
-            return
+            if not output_path:
+                self.handle_error("Lütfen çıktı dosyasının yolunu belirtin.")
+                return
 
-        # Dosya işleme arayüzünü hazırla
-        self.progress.setValue(0)
-        self.progress.show()
-        self.info_label.setText("Birleştirme işlemi başlatılıyor...")
-        self.info_label.show()
-        self.error_label.hide()
-        self.merge_btn.setEnabled(False)
-        
-        # İş parçacığını başlat
-        try:
-            self.worker = self.pdf_service.create_merge_worker(
-                self.file_list.get_files(),
-                self.output_path.text()
+            # Çıktı klasörünü kontrol et
+            output_dir = os.path.dirname(output_path)
+            if output_dir and not os.path.exists(output_dir):
+                try:
+                    os.makedirs(output_dir, exist_ok=True)
+                except Exception as e:
+                    self.handle_error(f"Çıktı dizini oluşturulamadı: {str(e)}")
+                    return
+
+            # İşlemi onaylat
+            confirm = QMessageBox.question(
+                self,
+                "Birleştirme İşlemini Onayla",
+                f"{len(files_to_merge)} PDF dosyası birleştirilecek.\n\nÇıktı: {output_path}\n\nDevam etmek istiyor musunuz?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.Yes
             )
             
-            # Sinyalleri bağla
-            self.worker.progress.connect(self.update_progress)
-            self.worker.finished.connect(self.handle_merge_finished)
+            if confirm != QMessageBox.StandardButton.Yes:
+                return
+
+            # İlerleme göstergelerini ayarla
+            self.progress.setValue(0)
+            self.progress.setRange(0, 100)
+            self.progress.show()
+            self.info_label.setText("Birleştirme işlemi başlatılıyor...")
+            self.info_label.show()
+            self.error_label.hide()
+            self.merge_btn.setEnabled(False) # Butonu devre dışı bırak
             
             # İş parçacığını başlat
+            self.worker = self.pdf_service.create_merge_worker(files_to_merge, output_path)
+            self.worker.finished.connect(self.handle_merge_finished)
+            self.worker.progress.connect(self.update_progress)
             self.worker.start()
         except Exception as e:
-            self.handle_error(f"Birleştirme işlemi başlatılamadı: {str(e)}")
+            self.handle_error(f"Birleştirme işlemi başlatılırken hata oluştu: {str(e)}")
     
     def update_progress(self, value):
         """İlerleme çubuğunu günceller."""
@@ -502,8 +456,8 @@ class PDFMergeWindow(QWidget):
     def showEvent(self, event):
         """Pencere gösterildiğinde çağrılır."""
         super().showEvent(event)
-        # Pencere her gösterildiğinde DragDropWidget'a odak ver
-        QTimer.singleShot(100, lambda: self.drag_drop.setFocus())
+        # Pencere her gösterildiğinde DragDropWidget'a otomatik odaklanma (Kaldırıldı)
+        # QTimer.singleShot(100, lambda: self.drag_drop.setFocus())
         
         # Buton durumunu güncelle
         self.update_button_state()
@@ -523,24 +477,3 @@ class PDFMergeWindow(QWidget):
         elif has_output:
             self.step1_label.setStyleSheet(INACTIVE_STEP_STYLE)
             self.step2_label.setStyleSheet(ACTIVE_STEP_STYLE)
-
-    def refocus_drag_drop(self):
-        """DragDropWidget'a odak ver."""
-        if not hasattr(self, 'drag_drop') or not self.isVisible():
-            return
-            
-        # Önce widget'ın güncellenmesini sağla
-        self.drag_drop.updateGeometry()
-        self.drag_drop.repaint()
-        
-        # Kısa bir gecikme ile odak vermeyi dene (50ms)
-        QTimer.singleShot(50, self._set_focus_to_drag_drop)
-        # Daha uzun bir gecikme ile tekrar dene (ikinci şans)
-        QTimer.singleShot(250, self._set_focus_to_drag_drop)
-        
-    def _set_focus_to_drag_drop(self):
-        """DragDropWidget'a odak verme işlemi"""
-        if hasattr(self, 'drag_drop') and self.isVisible() and self.drag_drop.isVisible():
-            # Widget görünür ve ulaşılabilirse odak ver
-            self.drag_drop.setFocus(Qt.FocusReason.OtherFocusReason)
-            print("PDF Birleştirme: DragDrop'a odak verildi.") 

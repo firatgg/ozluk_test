@@ -112,19 +112,19 @@ class DragDropWidget(QLabel):
         self.animation_timer.timeout.connect(self.reset_style)
         
         # Odak kaybını izlemek için zamanlayıcı
-        self.focus_check_timer = QTimer()
-        self.focus_check_timer.setInterval(500)  # 500ms'de bir kontrol et
-        self.focus_check_timer.timeout.connect(self.check_focus)
-        self.focus_check_timer.start()
+        # self.focus_check_timer = QTimer()
+        # self.focus_check_timer.setInterval(500)  # 500ms'de bir kontrol et
+        # self.focus_check_timer.timeout.connect(self.check_focus)
+        # self.focus_check_timer.start()
         
-    def check_focus(self):
-        """Odak durumunu düzenli olarak kontrol eder ve gerekirse odak alır"""
-        if not self.hasFocus() and self.isVisible() and self.parent() and self.parent().isVisible():
-            # Ana pencere aktifse ve bu widget görünür durumdaysa odak almaya çalış
-            window = self.window()
-            if window and window.isActiveWindow():
-                self.setFocus(Qt.FocusReason.MouseFocusReason)
-                print("Odak yeniden alındı")
+    # def check_focus(self):
+    #     """Odak durumunu düzenli olarak kontrol eder ve gerekirse odak alır"""
+    #     if not self.hasFocus() and self.isVisible() and self.parent() and self.parent().isVisible():
+    #         # Ana pencere aktifse ve bu widget görünür durumdaysa odak almaya çalış
+    #         window = self.window()
+    #         if window and window.isActiveWindow():
+    #             self.setFocus(Qt.FocusReason.MouseFocusReason)
+    #             print("Odak yeniden alındı")
                 
     def keyPressEvent(self, event: QKeyEvent):
         """Klavye olaylarını yakala"""
@@ -169,8 +169,7 @@ class DragDropWidget(QLabel):
         """Widget görünür hale geldiğinde çağrılır"""
         super().showEvent(event)
         # Kısa bir gecikme ile odak almaya çalış
-        QTimer.singleShot(100, lambda: self.setFocus(Qt.FocusReason.OtherFocusReason))
-        print("DragDrop widget görünür oldu")
+        # QTimer.singleShot(100, lambda: self.setFocus(Qt.FocusReason.OtherFocusReason))
         
     def focusInEvent(self, event):
         """Widget odak aldığında çağrılır."""
@@ -178,8 +177,7 @@ class DragDropWidget(QLabel):
         # Odak durumunu görsel olarak belirginleştir
         self.setStyleSheet(self.focus_received_style)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.raise_()  # Widget'ı en üste getir
-        print("DragDrop widget odak aldı")
+        # self.raise_()  # Widget'ı en üste getir
         
     def open_file_dialog(self):
         """Dosya seçim dialogunu açar"""
@@ -197,7 +195,7 @@ class DragDropWidget(QLabel):
     def mousePressEvent(self, event):
         """Tıklama olayını yakala"""
         if event.button() == Qt.MouseButton.LeftButton:
-            self.setFocus()  # Tıklandığında odağı al
+            # self.setFocus()  # Tıklandığında odağı al - kaldırıldı, çünkü odak sorunlarına yol açıyor
             self.open_file_dialog()
         
     def dragEnterEvent(self, event: QDragEnterEvent):

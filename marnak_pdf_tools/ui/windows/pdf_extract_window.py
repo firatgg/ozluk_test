@@ -152,38 +152,47 @@ class PDFExtractWindow(QWidget):
         
     def browse_input_file(self):
         """Giriş PDF dosyasını seçmek için dosya seçiciyi açar."""
-        file_path, _ = QFileDialog.getOpenFileName(
-            self, "PDF Dosyası Seç", "", "PDF Dosyaları (*.pdf)"
-        )
-        
-        if file_path:
-            self.input_file = file_path
-            self.input_path.setText(file_path)
-            
-            # Otomatik çıkış dizini önerisi
-            suggested_output = os.path.join(
-                os.path.dirname(file_path), 
-                os.path.splitext(os.path.basename(file_path))[0]
+        try:
+            file_path, _ = QFileDialog.getOpenFileName(
+                self, "PDF Dosyası Seç", "", "PDF Dosyaları (*.pdf)"
             )
-            
-            if not self.output_dir:
-                self.output_dir = suggested_output
-                self.output_path.setText(suggested_output)
+        
+            if file_path:
+                self.input_file = file_path
+                self.input_path.setText(file_path)
+                
+                # Otomatik çıkış dizini önerisi
+                suggested_output = os.path.join(
+                    os.path.dirname(file_path), 
+                    os.path.splitext(os.path.basename(file_path))[0]
+                )
+                
+                if not self.output_dir:
+                    self.output_dir = suggested_output
+                    self.output_path.setText(suggested_output)
+        except Exception as e:
+            self.handle_error(f"Giriş dosyası seçilirken hata oluştu: {str(e)}")
     
     def browse_output_dir(self):
         """Çıkış dizinini seçmek için dizin seçiciyi açar."""
-        dir_path = QFileDialog.getExistingDirectory(
-            self, "Çıkış Dizini Seç", ""
-        )
-        
-        if dir_path:
-            self.output_dir = dir_path
-            self.output_path.setText(dir_path)
+        try:
+            dir_path = QFileDialog.getExistingDirectory(
+                self, "Çıkış Dizini Seç", ""
+            )
+            
+            if dir_path:
+                self.output_dir = dir_path
+                self.output_path.setText(dir_path)
+        except Exception as e:
+            self.handle_error(f"Çıkış dizini seçilirken hata oluştu: {str(e)}")
     
     def toggle_page_range(self, state):
         """Sayfa aralığı giriş alanını etkinleştirir veya devre dışı bırakır."""
-        self.extract_all = (state == Qt.CheckState.Checked)
-        self.page_range_input.setEnabled(not self.extract_all)
+        try:
+            self.extract_all = (state == Qt.CheckState.Checked)
+            self.page_range_input.setEnabled(not self.extract_all)
+        except Exception as e:
+            self.handle_error(f"Sayfa aralığı ayarlanırken hata oluştu: {str(e)}")
     
     def update_progress(self, value):
         """İlerleme çubuğunu günceller."""
@@ -192,10 +201,13 @@ class PDFExtractWindow(QWidget):
     
     def stop_process(self):
         """İşlemi durdurur."""
-        if self.worker and self.worker.isRunning():
-            self.worker.requestInterruption()
-            self.stop_button.setEnabled(False)
-            self.status_label.setText("İşlem durduruluyor...")
+        try:
+            if self.worker and self.worker.isRunning():
+                self.worker.requestInterruption()
+                self.stop_button.setEnabled(False)
+                self.status_label.setText("İşlem durduruluyor...")
+        except Exception as e:
+            self.handle_error(f"İşlem durdurulurken hata oluştu: {str(e)}")
 
     def process_extract(self):
         """PDF ayıklama işlemini başlatır."""
@@ -252,38 +264,41 @@ class PDFExtractWindow(QWidget):
     
     def handle_extract_finished(self, success, message):
         """Ayıklama işlemi tamamlandığında çağrılır."""
-        self.extract_button.setEnabled(True)
-        self.stop_button.setEnabled(False)
-        
-        if success:
-            self.progress_bar.setValue(100)
-            self.status_label.setText("Ayıklama işlemi tamamlandı.")
-            self.error_label.hide()
+        try:
+            self.extract_button.setEnabled(True)
+            self.stop_button.setEnabled(False)
             
-            # Sonuç mesajı göster
-            result_message = f"PDF sayfaları başarıyla ayıklandı.\nÇıkış dizini: {self.output_dir}"
-            QMessageBox.information(self, "İşlem Tamamlandı", result_message)
-            
-            # Açma seçeneği sun
-            reply = QMessageBox.question(
-                self, 
-                "Dizini Aç", 
-                "Ayıklanan sayfaların bulunduğu dizini açmak ister misiniz?",
+            if success:
+                self.progress_bar.setValue(100)
+                self.status_label.setText("Ayıklama işlemi tamamlandı.")
+                self.error_label.hide()
+                
+                # Sonuç mesajı göster
+                result_message = f"PDF sayfaları başarıyla ayıklandı.\nÇıkış dizini: {self.output_dir}"
+                QMessageBox.information(self, "İşlem Tamamlandı", result_message)
+                
+                # Açma seçeneği sun
+                reply = QMessageBox.question(
+                    self, 
+                    "Dizini Aç", 
+                    "Ayıklanan sayfaların bulunduğu dizini açmak ister misiniz?",
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No, 
                 QMessageBox.StandardButton.Yes
             )
             
-            if reply == QMessageBox.StandardButton.Yes:
-                try:
-                    open_file(self.output_dir)
-                except Exception as e:
-                    QMessageBox.warning(
-                        self, 
-                        "Uyarı", 
-                        f"Dizin açılamadı: {str(e)}"
-                    )
-        else:
-            self.handle_error(f"Ayıklama işlemi başarısız oldu: {message}")
+                if reply == QMessageBox.StandardButton.Yes:
+                    try:
+                        open_file(self.output_dir)
+                    except Exception as e:
+                        QMessageBox.warning(
+                            self, 
+                            "Uyarı", 
+                            f"Dizin açılamadı: {str(e)}"
+                        )
+            else:
+                self.handle_error(f"Ayıklama işlemi başarısız oldu: {message}")
+        except Exception as e:
+            self.handle_error(f"Ayıklama tamamlama işlemi sırasında hata oluştu: {str(e)}")
     
     def handle_error(self, message):
         """Hata mesajını gösterir ve durumu sıfırlar."""
@@ -300,29 +315,33 @@ class PDFExtractWindow(QWidget):
     def showEvent(self, event):
         """Pencere gösterildiğinde çağrılır."""
         super().showEvent(event)
-        # Pencere her gösterildiğinde DragDropWidget'a odak ver
-        QTimer.singleShot(100, lambda: self.drag_drop.setFocus() if hasattr(self, 'drag_drop') else None)
+        # Pencere her gösterildiğinde DragDropWidget'a odak ver (Kaldırıldı)
+        # QTimer.singleShot(100, lambda: self.drag_drop.setFocus() if hasattr(self, 'drag_drop') else None)
 
     def handle_dropped_files(self, file_paths):
         """Sürüklenen PDF dosyalarını işler."""
-        pdf_files = [f for f in file_paths if f.lower().endswith('.pdf')]
-        if not pdf_files:
-            return
+        try:
+            pdf_files = [f for f in file_paths if f.lower().endswith('.pdf')]
+            if not pdf_files:
+                self.handle_error("Sürüklenen dosyalarda PDF bulunamadı.")
+                return
             
-        # İlk PDF dosyasını kullan
-        file_path = pdf_files[0]
-        self.input_file = file_path
-        self.input_path.setText(file_path)
-        
-        # Otomatik çıkış dizini önerisi
-        suggested_output = os.path.join(
-            os.path.dirname(file_path), 
-            os.path.splitext(os.path.basename(file_path))[0]
-        )
-        
-        if not self.output_dir:
-            self.output_dir = suggested_output
-            self.output_path.setText(suggested_output) 
+            # İlk PDF dosyasını kullan
+            file_path = pdf_files[0]
+            self.input_file = file_path
+            self.input_path.setText(file_path)
+            
+            # Otomatik çıkış dizini önerisi
+            suggested_output = os.path.join(
+                os.path.dirname(file_path), 
+                os.path.splitext(os.path.basename(file_path))[0]
+            )
+            
+            if not self.output_dir:
+                self.output_dir = suggested_output
+                self.output_path.setText(suggested_output) 
+        except Exception as e:
+            self.handle_error(f"Sürüklenen dosyalar işlenirken hata oluştu: {str(e)}")
 
     def clear(self):
         """Pencereyi temizler."""

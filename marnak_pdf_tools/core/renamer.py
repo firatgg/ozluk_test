@@ -3,7 +3,7 @@ PDF dosyalarını yeniden adlandırma işlemlerini gerçekleştiren modül.
 """
 import os
 import shutil
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Dict, Any
 from PyPDF2 import PdfReader
 
 class PdfRenamer:
@@ -46,25 +46,32 @@ class PdfRenamer:
         except Exception as e:
             return False, f"PDF kontrolü başarısız: {str(e)}"
     
-    def rename_pdfs(self, 
-                   file_paths: List[str], 
-                   output_dir: str, 
-                   new_name: str,
-                   keep_originals: bool = True,
+    def rename_pdfs(self,
+                   file_paths: List[str],
+                   output_dir: str,
+                   options: Optional[Dict[str, Any]] = None,
                    progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """
         PDF dosyalarını yeniden adlandırır.
-        
+
         Args:
             file_paths: İşlenecek PDF dosyalarının yolları
             output_dir: Çıktı klasörü
-            new_name: Yeni dosya adı formatı
-            keep_originals: Orijinal dosyaları kopyala
+            options: Yeniden adlandırma seçenekleri (new_name, keep_originals)
             progress_callback: İlerleme durumunu bildiren fonksiyon
-            
+
         Returns:
             Tuple[bool, str, List[str]]: (Başarılı mı?, Mesaj, İşlenen dosyalar)
         """
+        if options is None:
+            options = {}
+
+        new_name = options.get("new_name")
+        if not new_name:
+            return False, "Yeni dosya adı belirtilmemiş.", []
+
+        keep_originals = options.get("keep_originals", True)
+
         try:
             # Çıktı klasörünü kontrol et/oluştur
             if not os.path.exists(output_dir):

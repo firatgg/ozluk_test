@@ -1,0 +1,14 @@
+# Sanal ortam dizini
+venv/
+
+# Python derleme önbelleği
+__pycache__/
+*.pyc
+*.pyo
+
+# Log dosyaları
+*.log
+
+# Çıktı dizinleri
+classified_documents/
+to_classify/ 

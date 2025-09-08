@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtCore import QSize
-from ..styles import BUTTON_STYLE, GREEN_BUTTON_STYLE, SECONDARY_BUTTON_STYLE
+from ..styles import BUTTON_STYLE, GREEN_BUTTON_STYLE, SECONDARY_BUTTON_STYLE_OLD
 
 class ModernButton(QPushButton):
     """Modern düğme komponenti."""
@@ -25,4 +25,4 @@ class ModernButton(QPushButton):
             self.setStyleSheet(BUTTON_STYLE)
         else:
             # Secondary düğme için varsayılan stil
-            self.setStyleSheet(SECONDARY_BUTTON_STYLE) 
+            self.setStyleSheet(SECONDARY_BUTTON_STYLE_OLD) 
