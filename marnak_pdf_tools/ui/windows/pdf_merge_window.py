@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, 
     QLabel, QPushButton, QFileDialog,
     QMessageBox, QLineEdit, QProgressBar,
-    QFrame, QScrollArea, QSplitter
+    QFrame, QScrollArea, QSplitter, QSizePolicy
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QSize
 from PyQt6.QtGui import QIcon, QPixmap, QResizeEvent
@@ -160,35 +160,13 @@ class PDFMergeWindow(QWidget):
         
         self.file_list = FileListWidget()
         self.file_list.setStyleSheet(FILE_LIST_STYLE)
-        self.file_list.setMinimumHeight(200)
+        self.file_list.setMinimumHeight(500)  # Minimum yükseklik
+        self.file_list.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)  # Dikey olarak genişleyebilir
         self.file_list.files_changed.connect(self.update_button_state)
         # self.file_list.files_removed.connect(self.refocus_drag_drop) # Kaldırıldı
-        file_card_layout.addWidget(self.file_list)
+        file_card_layout.addWidget(self.file_list, 1)  # Stretch factor 1 ile ekle
         
-        file_layout.addWidget(file_card)
-        
-        # Bilgi kartı
-        info_card = QWidget()
-        info_card.setStyleSheet(CARD_STYLE)
-        info_layout = QVBoxLayout(info_card)
-        info_layout.setSpacing(10)
-        
-        # Bilgi başlığı
-        info_header = QLabel("Bilgi")
-        info_header.setStyleSheet(SECTION_TITLE_STYLE)
-        info_layout.addWidget(info_header)
-        
-        # Bilgi metni
-        info_text = QLabel(
-            "PDF dosyalarını sürükleyerek, Ctrl+V ile yapıştırarak veya 'Dosya Ekle' düğmesi ile seçerek ekleyebilirsiniz.\n\n"
-            "Dosyalar, listede gösterilen sırada birleştirilecektir. Sırayı değiştirmek için dosyaları sürükleyip bırakabilirsiniz."
-        )
-        info_text.setStyleSheet(INFO_BOX_STYLE)
-        info_text.setWordWrap(True)
-        info_layout.addWidget(info_text)
-        
-        file_layout.addWidget(info_card)
-        file_layout.addStretch()
+        file_layout.addWidget(file_card, 1)  # Stretch factor 1 ile ekle
         
         # Sağ panel - çıktı ayarları
         output_panel = QWidget()
@@ -265,12 +243,12 @@ class PDFMergeWindow(QWidget):
         # Panelleri splitter'a ekle
         self.splitter.addWidget(file_panel)
         self.splitter.addWidget(output_panel)
-        self.splitter.setSizes([500, 300])  # Panel boyutlarını ayarla
+        self.splitter.setSizes([700, 300])  # Panel boyutlarını ayarla - PDF listesi için daha fazla alan
         
         layout.addWidget(self.splitter, 1)  # stretch factör 1 ile ekle
         
         # Pencere ayarları
-        self.setMinimumSize(900, 600)
+        self.setMinimumSize(1200, 800)
         self.setWindowTitle("PDF Birleştirme")
         
     def add_files(self, file_paths):

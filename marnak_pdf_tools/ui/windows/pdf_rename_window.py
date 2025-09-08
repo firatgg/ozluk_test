@@ -144,7 +144,7 @@ class PDFRenameWindow(QWidget):
         # Dosya listesi
         self.file_list = FileListWidget()
         self.file_list.setStyleSheet(FILE_LIST_STYLE)
-        self.file_list.setMaximumHeight(200)
+        self.file_list.setMinimumHeight(400)  # PDF listesi için daha fazla alan
         file_card_layout.addWidget(self.file_list)
         
         file_layout.addWidget(file_card)
@@ -204,7 +204,7 @@ class PDFRenameWindow(QWidget):
         # Panelleri bölücüye ekle
         self.splitter.addWidget(file_panel)
         self.splitter.addWidget(settings_panel)
-        self.splitter.setSizes([400, 300])  # Başlangıç boyutları
+        self.splitter.setSizes([500, 300])  # Başlangıç boyutları - PDF listesi için daha fazla alan
         
         layout.addWidget(self.splitter)
         

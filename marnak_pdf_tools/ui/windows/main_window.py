@@ -35,7 +35,7 @@ class MainWindow(QMainWindow):
         icon_path = os.path.join(current_dir, "icons", "android-chrome-512x512.png")
         self.setWindowIcon(QIcon(icon_path))
         
-        self.setMinimumSize(1000, 700)
+        self.setMinimumSize(1200, 800)
         self.setStyleSheet(MAIN_WINDOW_STYLE)
         
         # Menü genişliği ve açılır-kapanır durumu

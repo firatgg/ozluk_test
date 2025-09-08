@@ -148,7 +148,7 @@ class PDFExtractWindow(QWidget):
         
         # Pencere ayarları
         self.setWindowTitle("PDF Sayfalarını Ayıkla")
-        self.resize(600, 400)
+        self.setMinimumSize(800, 600)
         
     def browse_input_file(self):
         """Giriş PDF dosyasını seçmek için dosya seçiciyi açar."""

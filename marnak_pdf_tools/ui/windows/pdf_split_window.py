@@ -213,6 +213,7 @@ class PDFSplitWindow(QWidget):
         # Dosya listesi
         self.file_list = FileListWidget(selectable=True)
         self.file_list.setStyleSheet(FILE_LIST_STYLE)
+        self.file_list.setMinimumHeight(400)  # PDF listesi için daha fazla alan
         self.file_list.files_changed.connect(self.update_file_count)
         # self.file_list.files_removed.connect(self.refocus_drag_drop) # Kaldırıldı
         self.file_list.itemChanged.connect(self.check_item_state)
@@ -432,12 +433,12 @@ class PDFSplitWindow(QWidget):
         # Panelleri splitter'a ekle
         self.splitter.addWidget(left_panel)
         self.splitter.addWidget(right_panel)
-        self.splitter.setSizes([300, 500])  # Panel boyutlarını ayarla
+        self.splitter.setSizes([400, 500])  # Panel boyutlarını ayarla - PDF listesi için daha fazla alan
         
         main_layout.addWidget(self.splitter, 1)  # 1 stretch factor ile ekle
         
         # Pencere ayarları
-        self.setMinimumSize(900, 600)
+        self.setMinimumSize(1000, 700)
         self.setWindowTitle("PDF Bölme")
     
     def create_step_label(self, number, text):
