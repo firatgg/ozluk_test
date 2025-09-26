@@ -50,7 +50,8 @@ class PdfRenamer:
                    file_paths: List[str],
                    output_dir: str,
                    options: Optional[Dict[str, Any]] = None,
-                   progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
+                   progress_callback: Optional[callable] = None,
+                   interrupt_check: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """
         PDF dosyalarını yeniden adlandırır.
 
@@ -59,6 +60,7 @@ class PdfRenamer:
             output_dir: Çıktı klasörü
             options: Yeniden adlandırma seçenekleri (new_name, keep_originals)
             progress_callback: İlerleme durumunu bildiren fonksiyon
+            interrupt_check: İşlem iptal edildi mi kontrol eden fonksiyon
 
         Returns:
             Tuple[bool, str, List[str]]: (Başarılı mı?, Mesaj, İşlenen dosyalar)
@@ -86,6 +88,10 @@ class PdfRenamer:
             total_files = len(file_paths)
             
             for i, file_path in enumerate(file_paths):
+                # İptal kontrolü
+                if interrupt_check and interrupt_check():
+                    return False, "İşlem kullanıcı tarafından iptal edildi.", processed_files
+                
                 try:
                     # PDF kontrolü
                     is_valid, error = self.check_pdf(file_path)

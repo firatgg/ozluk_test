@@ -1,6 +1,38 @@
 """
 Uygulama genelinde kullanılan stil tanımlamaları.
 """
+from ..utils.settings import get_scale_factor
+
+def scale_value(base_value: int) -> int:
+    """Değeri mevcut ölçek faktörüne göre ölçekle."""
+    scale = get_scale_factor()
+    return int(base_value * scale)
+
+def get_scaled_styles():
+    """Ölçeklenmiş stilleri döndür."""
+    scale = get_scale_factor()
+    return {
+        'font_size_small': scale_value(12),
+        'font_size_normal': scale_value(14), 
+        'font_size_large': scale_value(16),
+        'font_size_xlarge': scale_value(18),
+        'font_size_xxlarge': scale_value(22),
+        'font_size_xxxlarge': scale_value(24),
+        'padding_small': scale_value(5),
+        'padding_normal': scale_value(10),
+        'padding_large': scale_value(15),
+        'padding_xlarge': scale_value(20),
+        'margin_small': scale_value(5),
+        'margin_normal': scale_value(10),
+        'margin_large': scale_value(15),
+        'border_radius': scale_value(6),
+        'border_radius_small': scale_value(4),
+        'border_radius_large': scale_value(8),
+        'button_height': scale_value(40),
+        'menu_width': scale_value(200),
+        'min_window_width': scale_value(1200),
+        'min_window_height': scale_value(800)
+    }
 
 # Kurumsal Renkler
 CORP_BLUE = "#2C3E50"       # Koyu lacivert - ana renk
@@ -45,36 +77,46 @@ MENU_WIDGET_STYLE = f"""
     }}
 """
 
-# Menü başlık stili
-MENU_HEADER_STYLE = """
-    QLabel {
+def get_menu_header_style():
+    """Ölçeklenmiş menü başlık stilini döndür."""
+    s = get_scaled_styles()
+    return f"""
+    QLabel {{
         color: white;
-        font-size: 22px;
+        font-size: {s['font_size_xxlarge']}px;
         font-weight: bold;
-        padding: 10px 5px;
+        padding: {s['padding_normal']}px {s['padding_small']}px;
         text-align: center;
-    }
-"""
+    }}
+    """
 
-# Menü düğme stili
-MENU_BUTTON_STYLE = """
-    QPushButton {
+# Geriye uyumluluk için
+MENU_HEADER_STYLE = get_menu_header_style()
+
+def get_menu_button_style():
+    """Ölçeklenmiş menü düğme stilini döndür."""
+    s = get_scaled_styles()
+    return f"""
+    QPushButton {{
         background-color: transparent;
         color: white;
         border: none;
-        border-radius: 6px;
-        padding: 12px;
+        border-radius: {s['border_radius']}px;
+        padding: {s['padding_normal'] + 2}px;
         text-align: left;
-        font-size: 14px;
+        font-size: {s['font_size_normal']}px;
         font-weight: bold;
-    }
-    QPushButton:hover {
+    }}
+    QPushButton:hover {{
         background-color: rgba(255, 255, 255, 0.15);
-    }
-    QPushButton:pressed {
+    }}
+    QPushButton:pressed {{
         background-color: rgba(255, 255, 255, 0.25);
-    }
-"""
+    }}
+    """
+
+# Geriye uyumluluk için
+MENU_BUTTON_STYLE = get_menu_button_style()
 
 # İçerik widget'ı stili
 CONTENT_WIDGET_STYLE = """
@@ -91,25 +133,35 @@ RESPONSIVE_CONTAINER = f"""
     }}
 """
 
-# Modern başlık stili
-HEADER_STYLE = f"""
+def get_header_style():
+    """Ölçeklenmiş başlık stilini döndür."""
+    s = get_scaled_styles()
+    return f"""
     QLabel {{
         color: {CORP_BLUE};
-        font-size: 24px;
+        font-size: {s['font_size_xxxlarge']}px;
         font-weight: bold;
-        padding: 10px 0;
+        padding: {s['padding_normal']}px 0;
     }}
-"""
+    """
+
+# Modern başlık stili
+HEADER_STYLE = get_header_style()
+
+def get_subheader_style():
+    """Ölçeklenmiş alt başlık stilini döndür."""
+    s = get_scaled_styles()
+    return f"""
+    QLabel {{
+        color: {CORP_BLUE};
+        font-size: {s['font_size_xlarge']}px;
+        font-weight: bold;
+        padding: {s['padding_small']}px 0;
+    }}
+    """
 
 # Modern alt başlık stili
-SUBHEADER_STYLE = f"""
-    QLabel {{
-        color: {CORP_BLUE};
-        font-size: 18px;
-        font-weight: bold;
-        padding: 5px 0;
-    }}
-"""
+SUBHEADER_STYLE = get_subheader_style()
 
 # Modern bölüm başlığı stili
 SECTION_TITLE_STYLE = f"""
@@ -124,26 +176,34 @@ SECTION_TITLE_STYLE = f"""
     }}
 """
 
-# Modern kart stili
-CARD_STYLE = f"""
+def get_card_style():
+    """Ölçeklenmiş kart stilini döndür."""
+    s = get_scaled_styles()
+    return f"""
     QWidget {{
         background-color: white;
-        border-radius: 6px;
-        padding: 15px;
+        border-radius: {s['border_radius']}px;
+        padding: {s['padding_large']}px;
         border: 1px solid #E0E0E0;
     }}
-"""
+    """
 
-# Düğme stili
-BUTTON_STYLE = f"""
+# Modern kart stili
+CARD_STYLE = get_card_style()
+
+def get_button_style():
+    """Ölçeklenmiş düğme stilini döndür."""
+    s = get_scaled_styles()
+    return f"""
     QPushButton {{
         background-color: {CORP_BLUE};
         color: white;
         border: none;
-        border-radius: 4px;
-        padding: 8px 16px;
+        border-radius: {s['border_radius_small']}px;
+        padding: {s['padding_small'] + 3}px {s['padding_large'] + 1}px;
         font-weight: bold;
-        font-size: 14px;
+        font-size: {s['font_size_normal']}px;
+        min-height: {s['button_height'] - 20}px;
     }}
     QPushButton:hover {{
         background-color: {CORP_DARK_BLUE};
@@ -155,18 +215,24 @@ BUTTON_STYLE = f"""
         background-color: #BEC3C9;
         color: #F5F6F7;
     }}
-"""
+    """
 
-# Birincil buton stili
-PRIMARY_BUTTON_STYLE = f"""
+# Düğme stili
+BUTTON_STYLE = get_button_style()
+
+def get_primary_button_style():
+    """Ölçeklenmiş birincil düğme stilini döndür."""
+    s = get_scaled_styles()
+    return f"""
     QPushButton {{
         background-color: {MARNAK_BLUE};
         color: white;
         border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
+        border-radius: {s['border_radius_large']}px;
+        padding: {s['padding_normal']}px {s['padding_xlarge']}px;
         font-weight: bold;
-        font-size: 13px;
+        font-size: {s['font_size_small'] + 1}px;
+        min-height: {s['button_height'] - 10}px;
     }}
     QPushButton:hover {{
         background-color: #005599;
@@ -178,18 +244,24 @@ PRIMARY_BUTTON_STYLE = f"""
         background-color: #CCCCCC;
         color: #666666;
     }}
-"""
+    """
 
-# İkincil buton stili
-SECONDARY_BUTTON_STYLE_OLD = f"""
+# Birincil buton stili
+PRIMARY_BUTTON_STYLE = get_primary_button_style()
+
+def get_secondary_button_style():
+    """Ölçeklenmiş ikincil düğme stilini döndür."""
+    s = get_scaled_styles()
+    return f"""
     QPushButton {{
         background-color: {MARNAK_LIGHT_BLUE};
         color: {MARNAK_BLUE};
         border: 2px solid {MARNAK_BLUE};
-        border-radius: 8px;
-        padding: 10px 20px;
-        font-size: 13px;
+        border-radius: {s['border_radius_large']}px;
+        padding: {s['padding_normal']}px {s['padding_xlarge']}px;
+        font-size: {s['font_size_small'] + 1}px;
         font-weight: bold;
+        min-height: {s['button_height'] - 10}px;
     }}
     QPushButton:hover {{
         background-color: #D5E6F3;
@@ -204,7 +276,10 @@ SECONDARY_BUTTON_STYLE_OLD = f"""
         border-color: #CCCCCC;
         color: #666666;
     }}
-"""
+    """
+
+# İkincil buton stili
+SECONDARY_BUTTON_STYLE = get_secondary_button_style()
 
 # Başarı düğme stili
 GREEN_BUTTON_STYLE = f"""
@@ -576,7 +651,7 @@ INFO_LABEL_STYLE = f"""
 """
 
 # ErrorLabel Stili
-ERROR_LABEL_STYLE_NEW = """
+ERROR_LABEL_STYLE = """
     QLabel {
         color: red;
         font-size: 13px;

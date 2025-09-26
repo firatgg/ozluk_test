@@ -5,6 +5,7 @@ import os
 import re
 from typing import List, Tuple, Optional, Dict, Any
 from PyPDF2 import PdfReader, PdfWriter
+from .utils import parse_page_ranges
 
 class PdfSplitter:
     """PDF dosyalarını sayfalara bölme işlemlerini yöneten sınıf."""
@@ -26,7 +27,8 @@ class PdfSplitter:
                   file_path: str, 
                   output_dir: str,
                   options: Optional[Dict[str, Any]] = None,
-                  progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
+                  progress_callback: Optional[callable] = None,
+                  interrupt_check: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """
         PDF dosyasını belirtilen seçeneklere göre böler.
         
@@ -35,6 +37,7 @@ class PdfSplitter:
             output_dir: Çıktı klasörü
             options: Bölme seçenekleri
             progress_callback: İlerleme durumunu bildiren fonksiyon
+            interrupt_check: İşlem iptal edildi mi kontrol eden fonksiyon
             
         Returns:
             Tuple[bool, str, List[str]]: (Başarılı mı?, Mesaj, Oluşturulan dosyalar)
@@ -64,15 +67,19 @@ class PdfSplitter:
             try:
                 if not os.path.exists(output_dir):
                     os.makedirs(output_dir)
-            except Exception as e:
+            except (OSError, PermissionError) as e:
                 return False, f"Çıktı dizini oluşturulamadı: {str(e)}", []
+            except Exception as e:
+                return False, f"Beklenmeyen hata: {str(e)}", []
             
             # PDF dosyasını aç
             try:
                 pdf = PdfReader(file_path)
                 total_pages = len(pdf.pages)
+            except (FileNotFoundError, PermissionError) as e:
+                return False, f"PDF dosyası açılamadı: {str(e)}", []
             except Exception as e:
-                return False, f"PDF açılırken hata: {str(e)}", []
+                return False, f"PDF işleme hatası: {str(e)}", []
             
             if total_pages == 0:
                 return False, "PDF dosyası boş", []
@@ -85,13 +92,13 @@ class PdfSplitter:
             mode = options.get("mode", self.SPLIT_MODE_ALL_PAGES)
             
             if mode == self.SPLIT_MODE_ALL_PAGES:
-                return self._split_all_pages(pdf, file_path, output_dir, progress_callback)
+                return self._split_all_pages(pdf, file_path, output_dir, progress_callback, interrupt_check)
             elif mode == self.SPLIT_MODE_PAGE_RANGE:
-                return self._split_page_range(pdf, file_path, output_dir, options, progress_callback)
+                return self._split_page_range(pdf, file_path, output_dir, options, progress_callback, interrupt_check)
             elif mode == self.SPLIT_MODE_EVERY_N_PAGES:
-                return self._split_every_n_pages(pdf, file_path, output_dir, options, progress_callback)
+                return self._split_every_n_pages(pdf, file_path, output_dir, options, progress_callback, interrupt_check)
             elif mode == self.SPLIT_MODE_ODD_EVEN:
-                return self._split_odd_even(pdf, file_path, output_dir, options, progress_callback)
+                return self._split_odd_even(pdf, file_path, output_dir, options, progress_callback, interrupt_check)
             else:
                 return False, f"Bilinmeyen bölme modu: {mode}", []
             
@@ -108,7 +115,8 @@ class PdfSplitter:
                          pdf: PdfReader, 
                          file_path: str, 
                          output_dir: str, 
-                         progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
+                         progress_callback: Optional[callable] = None,
+                         interrupt_check: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """Her sayfayı ayrı bir PDF olarak böler."""
         try:
             total_pages = len(pdf.pages)
@@ -116,6 +124,11 @@ class PdfSplitter:
             base_name = os.path.splitext(os.path.basename(file_path))[0]
             
             for i in range(total_pages):
+                # İptal kontrolü
+                if interrupt_check and interrupt_check():
+                    pdf.close()
+                    return False, "İşlem kullanıcı tarafından iptal edildi.", output_files
+                
                 # Yeni PDF oluştur
                 writer = PdfWriter()
                 writer.add_page(pdf.pages[i])
@@ -161,23 +174,37 @@ class PdfSplitter:
                           file_path: str, 
                           output_dir: str, 
                           options: Dict[str, Any], 
-                          progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
+                          progress_callback: Optional[callable] = None,
+                          interrupt_check: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """Sayfa aralığına göre böler."""
         try:
             page_range_str = options.get("page_range", "")
             if not page_range_str:
                 return False, "Sayfa aralığı belirtilmemiş", []
             
-            # Sayfa aralıklarını ayrıştır
-            page_ranges = self._parse_page_ranges(page_range_str, len(pdf.pages))
-            if not page_ranges:
+            # Sayfa aralıklarını ayrıştır (merkezi fonksiyon kullan)
+            parsed_ranges = parse_page_ranges(page_range_str, len(pdf.pages))
+            if not parsed_ranges:
                 return False, "Geçersiz sayfa aralığı", []
+            
+            # List[List[int]] formatını List[Tuple[int, int]] formatına dönüştür
+            page_ranges = []
+            for page_list in parsed_ranges:
+                if page_list:
+                    start = min(page_list) + 1  # 1-tabanlı indeksleme için +1
+                    end = max(page_list) + 1    # 1-tabanlı indeksleme için +1
+                    page_ranges.append((start, end))
             
             total_ranges = len(page_ranges)
             output_files = []
             base_name = os.path.splitext(os.path.basename(file_path))[0]
             
             for i, (start, end) in enumerate(page_ranges):
+                # İptal kontrolü
+                if interrupt_check and interrupt_check():
+                    pdf.close()
+                    return False, "İşlem kullanıcı tarafından iptal edildi.", output_files
+                
                 # Yeni PDF oluştur
                 writer = PdfWriter()
                 
@@ -233,7 +260,8 @@ class PdfSplitter:
                             file_path: str, 
                             output_dir: str, 
                             options: Dict[str, Any], 
-                            progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
+                            progress_callback: Optional[callable] = None,
+                            interrupt_check: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """Her N sayfada bir böler."""
         try:
             pages_per_split = options.get("pages_per_split", 1)
@@ -248,6 +276,11 @@ class PdfSplitter:
             split_count = (total_pages + pages_per_split - 1) // pages_per_split
             
             for i in range(split_count):
+                # İptal kontrolü
+                if interrupt_check and interrupt_check():
+                    pdf.close()
+                    return False, "İşlem kullanıcı tarafından iptal edildi.", output_files
+                
                 # Yeni PDF oluştur
                 writer = PdfWriter()
                 
@@ -300,7 +333,8 @@ class PdfSplitter:
                        file_path: str, 
                        output_dir: str, 
                        options: Dict[str, Any], 
-                       progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
+                       progress_callback: Optional[callable] = None,
+                       interrupt_check: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """Tek/Çift sayfalara göre böler."""
         try:
             odd_even_mode = options.get("odd_even_mode", "odd")
@@ -314,6 +348,11 @@ class PdfSplitter:
                 # Tek sayfalar için PDF oluştur
                 odd_writer = PdfWriter()
                 for i in range(0, total_pages):
+                    # İptal kontrolü
+                    if interrupt_check and interrupt_check():
+                        pdf.close()
+                        return False, "İşlem kullanıcı tarafından iptal edildi.", output_files
+                    
                     if (i + 1) % 2 == 1:  # Tek sayfa
                         odd_writer.add_page(pdf.pages[i])
                 
@@ -340,6 +379,11 @@ class PdfSplitter:
                 # Çift sayfalar için PDF oluştur
                 even_writer = PdfWriter()
                 for i in range(0, total_pages):
+                    # İptal kontrolü
+                    if interrupt_check and interrupt_check():
+                        pdf.close()
+                        return False, "İşlem kullanıcı tarafından iptal edildi.", output_files
+                    
                     if (i + 1) % 2 == 0:  # Çift sayfa
                         even_writer.add_page(pdf.pages[i])
                 
@@ -367,6 +411,11 @@ class PdfSplitter:
                 # Tek veya çift sayfaları seç
                 writer = PdfWriter()
                 for i in range(0, total_pages):
+                    # İptal kontrolü
+                    if interrupt_check and interrupt_check():
+                        pdf.close()
+                        return False, "İşlem kullanıcı tarafından iptal edildi.", output_files
+                    
                     is_odd = (i + 1) % 2 == 1
                     
                     if (odd_even_mode == "odd" and is_odd) or (odd_even_mode == "even" and not is_odd):
@@ -411,52 +460,6 @@ class PdfSplitter:
             self._cleanup_files(output_files)
             return False, error_msg, []
     
-    def _parse_page_ranges(self, page_range_str: str, max_pages: int) -> List[Tuple[int, int]]:
-        """
-        Sayfa aralığı metnini ayrıştırır.
-        
-        Args:
-            page_range_str: Sayfa aralığı metni (örn: "1-5, 8-10, 15")
-            max_pages: Maksimum sayfa sayısı
-            
-        Returns:
-            List[Tuple[int, int]]: Sayfa aralıkları [(başlangıç, bitiş), ...]
-        """
-        ranges = []
-        parts = page_range_str.split(',')
-        
-        for part in parts:
-            part = part.strip()
-            
-            # Tek sayfa mı, aralık mı?
-            if '-' in part:
-                # Aralık (örn: 1-5)
-                try:
-                    start, end = part.split('-')
-                    start = int(start.strip())
-                    end = int(end.strip())
-                    
-                    # Geçerlilik kontrolü
-                    if start < 1 or end > max_pages or start > end:
-                        continue
-                    
-                    ranges.append((start, end))
-                except:
-                    continue
-            else:
-                # Tek sayfa (örn: 15)
-                try:
-                    page = int(part)
-                    
-                    # Geçerlilik kontrolü
-                    if page < 1 or page > max_pages:
-                        continue
-                    
-                    ranges.append((page, page))
-                except:
-                    continue
-        
-        return ranges
     
     def _cleanup_files(self, file_paths: List[str]):
         """İşlenmiş dosyaları temizler."""

@@ -3,8 +3,8 @@ Liste widget bileşenleri.
 """
 import os
 from PyQt6.QtWidgets import QListWidget, QListWidgetItem, QMenu, QScrollBar
-from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QKeyEvent, QAction, QFont
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer
+from PyQt6.QtGui import QKeyEvent, QAction, QFont, QCursor
 
 # Marnak Lojistik Kurumsal Renkleri
 MARNAK_BLUE = "#0066B3"
@@ -20,6 +20,7 @@ class PDFListWidget(QListWidget):
     # Sinyaller
     files_changed = pyqtSignal()  # Dosya listesi değiştiğinde
     files_removed = pyqtSignal()  # Dosyalar kaldırıldığında özel sinyal
+    pdf_selected = pyqtSignal(str)  # PDF seçildiğinde (dosya yolu)
     
     def __init__(self, parent=None, selectable=False):
         """
@@ -36,6 +37,9 @@ class PDFListWidget(QListWidget):
         
         # Seçilebilir mi?
         self.selectable = selectable
+        
+        # PDF Önizleme sistemi - tıklama ile
+        # Hover sistemi kaldırıldı, tıklama sistemi kullanılacak
         
         # Özel kaydırma çubuğu
         self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
@@ -285,4 +289,18 @@ class PDFListWidget(QListWidget):
         
         # Sinyalleri yayınla
         self.files_changed.emit()
-        self.files_removed.emit() 
+        self.files_removed.emit()
+        
+    def mousePressEvent(self, event):
+        """Mouse tıklama - PDF önizleme için."""
+        super().mousePressEvent(event)
+        
+        if event.button() == Qt.MouseButton.LeftButton:
+            item = self.itemAt(event.position().toPoint())
+            if item:
+                # PDF dosya yolunu al
+                file_path = item.data(Qt.ItemDataRole.UserRole)
+                if file_path and os.path.exists(file_path):
+                    # PDF önizleme sinyali gönder
+                    self.pdf_selected.emit(file_path)
+                    print(f"PDF seçildi: {os.path.basename(file_path)}")

@@ -8,60 +8,6 @@ from PyQt6.QtCore import QThread, pyqtSignal, QObject
 from ..core import PdfRenamer, PdfSplitter, PdfMerger, PdfExtractor
 import fitz
 
-def parse_page_ranges(range_text: str, total_pages: int) -> List[List[int]]:
-    """
-    Sayfa aralıkları metnini ayrıştırır ve sayfa listesi listesi döndürür.
-    
-    Args:
-        range_text: Sayfa aralıkları metni, örn. "1,3-5,7"
-        total_pages: PDF'deki toplam sayfa sayısı
-    
-    Returns:
-        Sayfa numaraları listesi listesi
-    """
-    result = []
-    
-    # Metin boş ise boş liste döndür
-    if not range_text or range_text.strip() == "":
-        return result
-        
-    # Virgülle ayrılmış parçalara böl
-    parts = range_text.split(",")
-    
-    for part in parts:
-        part = part.strip()
-        
-        # Aralık (örn. 3-5)
-        if "-" in part:
-            try:
-                start, end = part.split("-", 1)
-                start = int(start.strip())
-                end = int(end.strip())
-                
-                # 0 tabanlı indeksleme için ayarla (PDF okuyucu 1 tabanlı gösterir)
-                start = max(1, start) - 1  # En az 1, sonra 0-tabanlı için -1
-                end = min(total_pages, end) - 1  # En fazla toplam sayfa, sonra 0-tabanlı için -1
-                
-                if start <= end:
-                    result.append(list(range(start, end + 1)))
-            except:
-                # Ayrıştırma hatası, bu parçayı atla
-                continue
-        
-        # Tek sayfa (örn. 3)
-        else:
-            try:
-                page = int(part)
-                # 0 tabanlı indeksleme için ayarla
-                page = max(1, page) - 1  # En az 1, sonra 0-tabanlı için -1
-                
-                if 0 <= page < total_pages:
-                    result.append([page])
-            except:
-                # Ayrıştırma hatası, bu parçayı atla
-                continue
-                
-    return result
 
 class PDFRenameWorker(QThread):
     """PDF yeniden adlandırma işlemini arka planda yürüten iş parçacığı."""
@@ -83,14 +29,17 @@ class PDFRenameWorker(QThread):
                 file_paths=self.pdf_files,
                 output_dir=self.output_dir,
                 options=self.options,
-                progress_callback=self._update_progress
+                progress_callback=self._update_progress,
+                interrupt_check=self.is_interrupted
             )
             if self._interrupted:
                 self.finished.emit(False, "İşlem kullanıcı tarafından iptal edildi.")
                 return
             self.finished.emit(success, message)
+        except (FileNotFoundError, PermissionError) as e:
+            self.finished.emit(False, f"Dosya hatası: {str(e)}")
         except Exception as e:
-            self.finished.emit(False, f"Hata: {str(e)}")
+            self.finished.emit(False, f"Beklenmeyen hata: {str(e)}")
     
     def _update_progress(self, value):
         self.progress.emit(value)
@@ -99,6 +48,10 @@ class PDFRenameWorker(QThread):
         """İşlemi nazikçe durdurmak için."""
         self._interrupted = True
         super().requestInterruption()
+        
+    def is_interrupted(self):
+        """İşlem iptal edildi mi kontrol eder."""
+        return self._interrupted
 
 class PDFSplitWorker(QThread):
     """PDF bölme işlemini arka planda yürüten iş parçacığı."""
@@ -121,7 +74,8 @@ class PDFSplitWorker(QThread):
                 file_path=self.pdf_file,
                 output_dir=self.output_dir,
                 options=self.options,
-                progress_callback=self._update_progress
+                progress_callback=self._update_progress,
+                interrupt_check=self.is_interrupted
             )
             if self._interrupted:
                 self.finished.emit(False, "İşlem kullanıcı tarafından iptal edildi.")
@@ -137,6 +91,10 @@ class PDFSplitWorker(QThread):
         """İşlemi nazikçe durdurmak için."""
         self._interrupted = True
         super().requestInterruption()
+        
+    def is_interrupted(self):
+        """İşlem iptal edildi mi kontrol eder."""
+        return self._interrupted
 
 class PDFMergeWorker(QThread):
     """PDF birleştirme işlemini arka planda yürüten iş parçacığı."""
@@ -157,7 +115,8 @@ class PDFMergeWorker(QThread):
             success, message, _ = self.merger.merge_pdfs(
                 file_paths=self.pdf_files,
                 output_path=self.output_file,
-                progress_callback=self._update_progress
+                progress_callback=self._update_progress,
+                interrupt_check=self.is_interrupted
             )
             if self._interrupted:
                 self.finished.emit(False, "İşlem kullanıcı tarafından iptal edildi.")
@@ -173,6 +132,10 @@ class PDFMergeWorker(QThread):
         """İşlemi nazikçe durdurmak için."""
         self._interrupted = True
         super().requestInterruption()
+        
+    def is_interrupted(self):
+        """İşlem iptal edildi mi kontrol eder."""
+        return self._interrupted
 
 class PDFExtractWorker(QThread):
     """PDF sayfa çıkarma işlemini arka planda yürüten iş parçacığı."""
@@ -198,7 +161,8 @@ class PDFExtractWorker(QThread):
                 file_path=self.pdf_file,
                 output_dir=self.output_dir,
                 options=self.options,
-                progress_callback=self._update_progress
+                progress_callback=self._update_progress,
+                interrupt_check=self.is_interrupted
             )
             if self._interrupted:
                 self.finished.emit(False, "İşlem kullanıcı tarafından iptal edildi.")
@@ -214,6 +178,10 @@ class PDFExtractWorker(QThread):
         """İşlemi nazikçe durdurmak için."""
         self._interrupted = True
         super().requestInterruption()
+        
+    def is_interrupted(self):
+        """İşlem iptal edildi mi kontrol eder."""
+        return self._interrupted
 
 class PdfService(QObject):
     """PDF işlemleri için servis sınıfı."""
@@ -281,6 +249,38 @@ class PdfService(QObject):
         self.rename_worker.progress.connect(self.progress_updated)
         self.rename_worker.finished.connect(lambda success, message: self._handle_worker_finished(self.rename_worker, success, message))
         return self.rename_worker 
+
+    def validate_files(self, file_paths: list) -> tuple:
+        """
+        Dosya listesinin geçerliliğini kontrol eder.
+        
+        Args:
+            file_paths: Kontrol edilecek dosya yolları listesi
+            
+        Returns:
+            tuple: (başarılı_mı: bool, mesaj: str)
+        """
+        if not file_paths:
+            return False, "Dosya listesi boş"
+        
+        invalid_files = []
+        for file_path in file_paths:
+            if not os.path.exists(file_path):
+                invalid_files.append(f"{os.path.basename(file_path)} (bulunamadı)")
+            elif not os.access(file_path, os.R_OK):
+                invalid_files.append(f"{os.path.basename(file_path)} (okuma izni yok)")
+        
+        if invalid_files:
+            error_message = "Aşağıdaki dosyalar işlenemez:\n"
+            for file in invalid_files[:5]:  # En fazla 5 dosya göster
+                error_message += f"- {file}\n"
+            
+            if len(invalid_files) > 5:
+                error_message += f"... ve {len(invalid_files) - 5} dosya daha."
+            
+            return False, error_message
+        
+        return True, "Tüm dosyalar geçerli"
 
     def _handle_worker_finished(self, worker_thread: QThread, success: bool, message: str):
         """İş parçacığı tamamlandığında çağrılır."""

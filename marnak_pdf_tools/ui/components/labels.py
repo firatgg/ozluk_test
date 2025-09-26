@@ -3,7 +3,7 @@ Etiket bileşenleri.
 """
 from PyQt6.QtWidgets import QLabel
 from PyQt6.QtCore import Qt
-from ..styles import HEADER_LABEL_STYLE, INFO_LABEL_STYLE, ERROR_LABEL_STYLE_NEW
+from ..styles import HEADER_LABEL_STYLE, INFO_LABEL_STYLE, ERROR_LABEL_STYLE
 
 class HeaderLabel(QLabel):
     """Başlık etiketi."""
@@ -44,4 +44,4 @@ class ErrorLabel(QLabel):
         super().__init__(text, parent)
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.setWordWrap(True)
-        self.setStyleSheet(ERROR_LABEL_STYLE_NEW) 
+        self.setStyleSheet(ERROR_LABEL_STYLE) 

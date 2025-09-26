@@ -1,0 +1,10 @@
+Kurulum Tamamlandı!
+
+Marnak PDF Araçları başarıyla kuruldu.
+
+Kullanım:
+- Başlat menüsünden "Marnak PDF Araçları"nı açabilirsiniz
+- PDF dosyalarını sürükleyip bırakarak işleyebilirsiniz
+- Ayarlar menüsünden dil ve font boyutu ayarlarını değiştirebilirsiniz
+
+Destek için: https://www.marnak.com.tr

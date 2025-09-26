@@ -1,0 +1,10 @@
+Marnak PDF Araçları'na Hoş Geldiniz!
+
+Bu kurulum sihirbazı, Marnak PDF Araçları'nı bilgisayarınıza kuracaktır.
+
+Kurulum sırasında:
+- Uygulama Program Files klasörüne kurulacak
+- Başlat menüsüne kısayol eklenecek
+- İsteğe bağlı olarak masaüstü kısayolu oluşturulacak
+
+Devam etmek için "İleri" butonuna tıklayın.

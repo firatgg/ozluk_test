@@ -1,0 +1,22 @@
+# Basit çeviri dosyası - İngilizce
+# Bu dosya gerçek QM formatında değil, sadece test amaçlı
+Marnak PDF Araçları=Marnak PDF Tools
+Yeniden Adlandır=Rename
+Böl=Split
+Birleştir=Merge
+Ayarlar=Settings
+Ayarlar Güncellendi=Settings Updated
+Ayarlar başarıyla kaydedildi ve uygulandı.=Settings saved successfully and applied.
+Yazı Tipi Boyutu:=Font Size:
+Küçük (12px)=Small (12px)
+Normal (14px)=Normal (14px)
+Büyük (16px)=Large (16px)
+Dil:=Language:
+Türkçe=Turkish
+English=English
+Kaydet=Save
+İptal=Cancel
+Başarılı=Success
+Hata=Error
+Ayarlar kaydedilirken bir hata oluştu.=An error occurred while saving settings.
+Ayarlar kaydedilirken beklenmeyen bir hata oluştu:\n{error}=An unexpected error occurred while saving settings:\n{error}

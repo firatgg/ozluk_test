@@ -18,7 +18,8 @@ class PdfMerger:
     def merge_pdfs(self, 
                   file_paths: List[str], 
                   output_path: str,
-                  progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
+                  progress_callback: Optional[callable] = None,
+                  interrupt_check: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """
         PDF dosyalarını birleştirir.
         
@@ -26,6 +27,7 @@ class PdfMerger:
             file_paths: Birleştirilecek PDF dosyalarının yolları
             output_path: Çıktı dosyasının yolu
             progress_callback: İlerleme durumunu bildiren fonksiyon
+            interrupt_check: İşlem iptal edildi mi kontrol eden fonksiyon
             
         Returns:
             Tuple[bool, str]: (Başarılı mı?, Mesaj)
@@ -42,6 +44,10 @@ class PdfMerger:
             
             # Her dosyayı kontrol et ve birleştir
             for i, file_path in enumerate(file_paths):
+                # İptal kontrolü
+                if interrupt_check and interrupt_check():
+                    return False, "İşlem kullanıcı tarafından iptal edildi.", []
+                
                 try:
                     # PDF kontrolü
                     if not os.path.exists(file_path):
@@ -53,6 +59,10 @@ class PdfMerger:
                         raise ValueError(f"PDF dosyası boş: {file_path}")
                     
                     for page in pdf.pages:
+                        # İptal kontrolü
+                        if interrupt_check and interrupt_check():
+                            return False, "İşlem kullanıcı tarafından iptal edildi.", []
+                        
                         merger.add_page(page)
                     
                     # İlerleme bildirimi

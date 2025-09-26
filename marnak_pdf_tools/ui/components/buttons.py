@@ -3,7 +3,7 @@ Modern buton bileşenleri.
 """
 from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtCore import Qt
-from ..styles import PRIMARY_BUTTON_STYLE, SECONDARY_BUTTON_STYLE_OLD
+from ..styles import PRIMARY_BUTTON_STYLE, SECONDARY_BUTTON_STYLE
 
 class ModernButton(QPushButton):
     """Modern görünümlü buton bileşeni."""
@@ -23,4 +23,4 @@ class ModernButton(QPushButton):
         if primary:
             self.setStyleSheet(PRIMARY_BUTTON_STYLE)
         else:
-            self.setStyleSheet(SECONDARY_BUTTON_STYLE_OLD) 
+            self.setStyleSheet(SECONDARY_BUTTON_STYLE) 

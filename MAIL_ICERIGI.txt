@@ -1,0 +1,27 @@
+Konu: Marnak PDF Araçları - Kurulum Dosyası
+
+Merhaba,
+
+Marnak PDF Araçları uygulamasının kurulum dosyasını ekte gönderiyorum.
+
+KURULUM ADIMLARI:
+1. Ekteki "MarnakPDFAraclari.exe" dosyasını bilgisayarınıza indirin
+2. Dosyayı masaüstüne veya kolay erişebileceğiniz bir klasöre kopyalayın
+3. Dosyaya çift tıklayarak uygulamayı çalıştırın
+4. Windows Defender uyarısı çıkarsa "Daha fazla bilgi" → "Yine de çalıştır" seçin
+
+UYGULAMA ÖZELLİKLERİ:
+- PDF dosyalarını birleştirme
+- PDF dosyalarını bölme
+- PDF dosyalarını yeniden adlandırma
+- PDF dosyalarından metin çıkarma
+
+SORUN YAŞARSANIZ:
+- KURULUM_REHBERI.md dosyasını okuyun
+- IT departmanı ile iletişime geçin
+
+Dosya boyutu yaklaşık 50-100 MB olabilir. İndirme işlemi tamamlandıktan sonra uygulamayı kullanmaya başlayabilirsiniz.
+
+İyi çalışmalar,
+IT Departmanı
+

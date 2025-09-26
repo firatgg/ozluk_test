@@ -6,7 +6,8 @@ import os
 import logging
 from pathlib import Path
 from PyQt6.QtWidgets import QApplication
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QFont
+from PyQt6.QtCore import QTranslator, QLocale
 
 # Python path'ini düzelt
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -16,6 +17,7 @@ if parent_dir not in sys.path:
 
 from marnak_pdf_tools.ui.windows.main_window import MainWindow
 from marnak_pdf_tools.services.pdf_service import PdfService
+from marnak_pdf_tools.utils.settings import load_settings, get_scale_factor
 
 def get_log_path():
     """Kullanıcının yazma izni olan log dosyası yolunu döndürür."""
@@ -53,6 +55,16 @@ def main():
     logger.info(f"Log dosyası: {log_path}")
 
     app = QApplication(sys.argv)
+    
+    # Qt Settings ile ayarları yükle ve program ölçeğini ayarla
+    scale_factor = get_scale_factor()
+    base_font_size = 14
+    font_size = int(base_font_size * scale_factor)
+    app.setFont(QFont("Segoe UI", font_size))
+    logger.info(f"Program ölçeği ayarlandı: {scale_factor} (Font: {font_size}px)")
+    
+    # Basit çeviri sistemi - gerçek QTranslator yerine
+    # Bu sadece test amaçlı, gerçek uygulamada QTranslator kullanılmalı
     
     # Uygulama ikonunu ayarla
     current_dir = os.path.dirname(os.path.abspath(__file__))

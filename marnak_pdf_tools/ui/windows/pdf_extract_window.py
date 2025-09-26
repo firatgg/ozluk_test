@@ -9,7 +9,8 @@ import os
 from ..components import (
     ModernButton, ModernLineEdit, 
     ModernProgressBar, HeaderLabel,
-    InfoLabel, ErrorLabel, DragDropWidget
+    InfoLabel, ErrorLabel, DragDropWidget,
+    PdfViewer
 )
 from ...services.pdf_service import PdfService
 from ...utils.file_utils import open_file
@@ -33,118 +34,161 @@ class PDFExtractWindow(QWidget):
     def init_ui(self):
         """Kullanıcı arayüzünü oluşturur."""
         # Ana düzen
-        layout = QVBoxLayout()
-        layout.setContentsMargins(20, 20, 20, 20)
-        layout.setSpacing(15)
-        self.setLayout(layout)
+        main_layout = QVBoxLayout()
+        main_layout.setContentsMargins(20, 20, 20, 20)
+        main_layout.setSpacing(15)
+        self.setLayout(main_layout)
         
         # Başlık
-        header = HeaderLabel("PDF Sayfalarını Ayıkla")
-        layout.addWidget(header)
+        header = HeaderLabel(self.tr("PDF Sayfalarını Ayıkla"))
+        main_layout.addWidget(header)
+        
+        # Ana içerik - bölücü
+        from PyQt6.QtWidgets import QSplitter
+        self.splitter = QSplitter(Qt.Orientation.Horizontal)
+        
+        # Sol panel - Kontroller
+        left_panel = QWidget()
+        left_layout = QVBoxLayout(left_panel)
+        left_layout.setContentsMargins(0, 0, 0, 0)
+        left_layout.setSpacing(15)
         
         # Sürükle-bırak alanı
         self.drag_drop = DragDropWidget(self, "extract")
         self.drag_drop.files_dropped.connect(self.handle_dropped_files)
-        layout.addWidget(self.drag_drop)
+        left_layout.addWidget(self.drag_drop)
         
         # Giriş dosyası seçimi
         input_layout = QHBoxLayout()
         input_layout.setSpacing(10)
         
-        input_label = QLabel("Giriş Dosyası:")
-        self.input_path = ModernLineEdit("PDF Dosyası Seçin")
+        input_label = QLabel(self.tr("Giriş Dosyası:"))
+        self.input_path = ModernLineEdit(self.tr("PDF Dosyası Seçin"))
         self.input_path.setReadOnly(True)
+        self.input_path.textChanged.connect(self.on_input_file_changed)
         
-        browse_input_btn = ModernButton("Gözat")
+        browse_input_btn = ModernButton(self.tr("Gözat"))
         browse_input_btn.clicked.connect(self.browse_input_file)
         
         input_layout.addWidget(input_label, 1)
         input_layout.addWidget(self.input_path, 3)
         input_layout.addWidget(browse_input_btn, 1)
-        layout.addLayout(input_layout)
+        left_layout.addLayout(input_layout)
         
         # Çıkış dizini seçimi
         output_layout = QHBoxLayout()
         output_layout.setSpacing(10)
         
-        output_label = QLabel("Çıkış Dizini:")
-        self.output_path = ModernLineEdit("Çıkış Dizini Seçin")
+        output_label = QLabel(self.tr("Çıkış Dizini:"))
+        self.output_path = ModernLineEdit(self.tr("Çıkış Dizini Seçin"))
         self.output_path.setReadOnly(True)
         
-        browse_output_btn = ModernButton("Gözat")
+        browse_output_btn = ModernButton(self.tr("Gözat"))
         browse_output_btn.clicked.connect(self.browse_output_dir)
         
         output_layout.addWidget(output_label, 1)
         output_layout.addWidget(self.output_path, 3)
         output_layout.addWidget(browse_output_btn, 1)
-        layout.addLayout(output_layout)
+        left_layout.addLayout(output_layout)
         
         # Dosya önek girişi
         prefix_layout = QHBoxLayout()
         prefix_layout.setSpacing(10)
         
-        prefix_label = QLabel("Dosya Öneki:")
+        prefix_label = QLabel(self.tr("Dosya Öneki:"))
         self.file_prefix_input = ModernLineEdit("sayfa_")
         
         prefix_layout.addWidget(prefix_label, 1)
         prefix_layout.addWidget(self.file_prefix_input, 4)
-        layout.addLayout(prefix_layout)
+        left_layout.addLayout(prefix_layout)
         
         # Sayfa aralığı seçimi
         range_layout = QHBoxLayout()
         range_layout.setSpacing(10)
         
-        range_label = QLabel("Sayfa Aralığı:")
+        range_label = QLabel(self.tr("Sayfa Aralığı:"))
         self.page_range_input = ModernLineEdit("1,3-5,7")
         
         range_layout.addWidget(range_label, 1)
         range_layout.addWidget(self.page_range_input, 4)
-        layout.addLayout(range_layout)
+        left_layout.addLayout(range_layout)
         
         # Tüm sayfalar seçeneği
         all_pages_layout = QHBoxLayout()
-        self.all_pages_check = QCheckBox("Tüm Sayfaları Ayıkla")
+        self.all_pages_check = QCheckBox(self.tr("Tüm Sayfaları Ayıkla"))
         self.all_pages_check.setChecked(True)
         self.all_pages_check.stateChanged.connect(self.toggle_page_range)
         
         all_pages_layout.addWidget(self.all_pages_check)
         all_pages_layout.addStretch()
-        layout.addLayout(all_pages_layout)
+        left_layout.addLayout(all_pages_layout)
         
         # İlerleme çubuğu
         self.progress_bar = ModernProgressBar()
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(0)
         self.progress_bar.hide()
-        layout.addWidget(self.progress_bar)
+        left_layout.addWidget(self.progress_bar)
         
         # Bilgi ve hata etiketleri
         self.status_label = InfoLabel("")
         self.status_label.hide()
-        layout.addWidget(self.status_label)
+        left_layout.addWidget(self.status_label)
         
         self.error_label = ErrorLabel("")
         self.error_label.hide()
-        layout.addWidget(self.error_label)
+        left_layout.addWidget(self.error_label)
         
         # İşlem düğmeleri
         buttons_layout = QHBoxLayout()
         buttons_layout.setSpacing(10)
         
-        self.extract_button = ModernButton("Ayıkla")
+        self.extract_button = ModernButton(self.tr("Ayıkla"))
         self.extract_button.clicked.connect(self.process_extract)
         
-        self.stop_button = ModernButton("Durdur")
+        self.stop_button = ModernButton(self.tr("Durdur"))
         self.stop_button.clicked.connect(self.stop_process)
         self.stop_button.setEnabled(False)
         
         buttons_layout.addWidget(self.extract_button)
         buttons_layout.addWidget(self.stop_button)
         buttons_layout.addStretch()
-        layout.addLayout(buttons_layout)
+        left_layout.addLayout(buttons_layout)
         
         # Boşluk ekleyerek düzeni tamamla
-        layout.addStretch()
+        left_layout.addStretch()
+        
+        # Sağ panel - PDF önizleme
+        right_panel = QWidget()
+        right_layout = QVBoxLayout(right_panel)
+        right_layout.setContentsMargins(0, 0, 0, 0)
+        right_layout.setSpacing(10)
+        
+        # PDF önizleme başlığı
+        preview_header = QLabel(self.tr("PDF Önizleme"))
+        preview_header.setStyleSheet("""
+            QLabel {
+                font-size: 16px;
+                font-weight: bold;
+                color: #333;
+                padding: 10px;
+                background-color: #f0f0f0;
+                border-radius: 5px;
+            }
+        """)
+        preview_header.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        right_layout.addWidget(preview_header)
+        
+        # PDF viewer
+        self.pdf_viewer = PdfViewer()
+        right_layout.addWidget(self.pdf_viewer)
+        
+        # Panelleri splitter'a ekle
+        self.splitter.addWidget(left_panel)
+        self.splitter.addWidget(right_panel)
+        self.splitter.setSizes([400, 400])
+        
+        main_layout.addWidget(self.splitter, 1)
         
         # Pencere ayarları
         self.setWindowTitle("PDF Sayfalarını Ayıkla")
@@ -154,12 +198,15 @@ class PDFExtractWindow(QWidget):
         """Giriş PDF dosyasını seçmek için dosya seçiciyi açar."""
         try:
             file_path, _ = QFileDialog.getOpenFileName(
-                self, "PDF Dosyası Seç", "", "PDF Dosyaları (*.pdf)"
+                self, self.tr("PDF Dosyası Seç"), "", "PDF Dosyaları (*.pdf)"
             )
         
             if file_path:
                 self.input_file = file_path
                 self.input_path.setText(file_path)
+                
+                # PDF önizlemesini güncelle
+                self.pdf_viewer.load_pdf(file_path)
                 
                 # Otomatik çıkış dizini önerisi
                 suggested_output = os.path.join(
@@ -170,8 +217,10 @@ class PDFExtractWindow(QWidget):
                 if not self.output_dir:
                     self.output_dir = suggested_output
                     self.output_path.setText(suggested_output)
+        except (OSError, PermissionError) as e:
+            self.handle_error(self.tr("Dosya sistemi hatası: {}").format(str(e)))
         except Exception as e:
-            self.handle_error(f"Giriş dosyası seçilirken hata oluştu: {str(e)}")
+            self.handle_error(self.tr("Beklenmeyen hata: {}").format(str(e)))
     
     def browse_output_dir(self):
         """Çıkış dizinini seçmek için dizin seçiciyi açar."""
@@ -183,8 +232,10 @@ class PDFExtractWindow(QWidget):
             if dir_path:
                 self.output_dir = dir_path
                 self.output_path.setText(dir_path)
+        except (OSError, PermissionError) as e:
+            self.handle_error(f"Dosya sistemi hatası: {str(e)}")
         except Exception as e:
-            self.handle_error(f"Çıkış dizini seçilirken hata oluştu: {str(e)}")
+            self.handle_error(f"Beklenmeyen hata: {str(e)}")
     
     def toggle_page_range(self, state):
         """Sayfa aralığı giriş alanını etkinleştirir veya devre dışı bırakır."""
@@ -323,13 +374,16 @@ class PDFExtractWindow(QWidget):
         try:
             pdf_files = [f for f in file_paths if f.lower().endswith('.pdf')]
             if not pdf_files:
-                self.handle_error("Sürüklenen dosyalarda PDF bulunamadı.")
+                self.handle_error(self.tr("Sürüklenen dosyalarda PDF bulunamadı."))
                 return
             
             # İlk PDF dosyasını kullan
             file_path = pdf_files[0]
             self.input_file = file_path
             self.input_path.setText(file_path)
+            
+            # PDF önizlemesini güncelle
+            self.pdf_viewer.load_pdf(file_path)
             
             # Otomatik çıkış dizini önerisi
             suggested_output = os.path.join(
@@ -341,7 +395,20 @@ class PDFExtractWindow(QWidget):
                 self.output_dir = suggested_output
                 self.output_path.setText(suggested_output) 
         except Exception as e:
-            self.handle_error(f"Sürüklenen dosyalar işlenirken hata oluştu: {str(e)}")
+            self.handle_error(self.tr("Sürüklenen dosyalar işlenirken hata oluştu: {}").format(str(e)))
+    
+    def on_input_file_changed(self):
+        """Giriş dosyası değiştiğinde PDF önizlemesini güncelle."""
+        try:
+            file_path = self.input_path.text().strip()
+            if file_path and file_path != self.tr("PDF Dosyası Seçin") and os.path.exists(file_path):
+                self.input_file = file_path
+                self.pdf_viewer.load_pdf(file_path)
+            else:
+                self.pdf_viewer.clear()
+        except Exception as e:
+            print(f"PDF önizleme güncellenirken hata: {e}")
+            self.pdf_viewer.clear()
 
     def clear(self):
         """Pencereyi temizler."""

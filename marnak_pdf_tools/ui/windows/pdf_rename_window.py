@@ -285,8 +285,10 @@ class PDFRenameWindow(QWidget):
                 # Buton durumunu güncelle
                 self.update_button_state()
                 
+        except (OSError, PermissionError) as e:
+            self.show_error(f"Dosya sistemi hatası: {str(e)}")
         except Exception as e:
-            self.show_error(f"Dosya eklenirken hata oluştu: {str(e)}")
+            self.show_error(f"Beklenmeyen hata: {str(e)}")
             
     def select_files(self):
         """Dosya seçme dialogunu açar."""
@@ -302,8 +304,10 @@ class PDFRenameWindow(QWidget):
                 # Seçilen dosyaları ekle
                 self.add_files(files)
                 
+        except (OSError, PermissionError) as e:
+            self.show_error(f"Dosya sistemi hatası: {str(e)}")
         except Exception as e:
-            self.show_error(f"Dosya seçilirken hata oluştu: {str(e)}")
+            self.show_error(f"Beklenmeyen hata: {str(e)}")
                 
     def select_output_dir(self):
         """Çıktı dizini seçme dialogunu açar."""
@@ -320,8 +324,10 @@ class PDFRenameWindow(QWidget):
                 # Buton durumunu güncelle
                 self.update_button_state()
                 
+        except (OSError, PermissionError) as e:
+            self.show_error(f"Dosya sistemi hatası: {str(e)}")
         except Exception as e:
-            self.show_error(f"Çıktı dizini seçilirken hata oluştu: {str(e)}")
+            self.show_error(f"Beklenmeyen hata: {str(e)}")
             
     def start_renaming(self):
         """Yeniden adlandırma işlemini başlatır."""
@@ -348,23 +354,10 @@ class PDFRenameWindow(QWidget):
             self.show_error("Seçili PDF dosyası bulunamadı.")
             return
         
-        # Tüm dosyaların varlığını ve erişim izinlerini kontrol et
-        invalid_files = []
-        for file_path in source_files:
-            if not os.path.exists(file_path):
-                invalid_files.append(f"{os.path.basename(file_path)} (bulunamadı)")
-            elif not os.access(file_path, os.R_OK):
-                invalid_files.append(f"{os.path.basename(file_path)} (okuma izni yok)")
-        
-        if invalid_files:
-            error_message = "Aşağıdaki dosyalar işlenemez:\n"
-            for file in invalid_files[:5]:  # En fazla 5 dosya göster
-                error_message += f"- {file}\n"
-            
-            if len(invalid_files) > 5:
-                error_message += f"... ve {len(invalid_files) - 5} dosya daha."
-            
-            self.show_error(error_message)
+        # Dosya geçerliliğini kontrol et (services katmanından)
+        is_valid, validation_message = self.pdf_service.validate_files(source_files)
+        if not is_valid:
+            self.show_error(validation_message)
             return
         
         # Hedef dizinin yazılabilir olup olmadığını kontrol et

@@ -5,6 +5,7 @@ import os
 from typing import List, Tuple, Optional, Any, Dict
 from PyPDF2 import PdfReader, PdfWriter
 import fitz # PyMuPDF
+from .utils import parse_page_ranges
 
 class PdfExtractor:
     """PDF sayfalarını çıkarma işlemlerini yöneten sınıf."""
@@ -20,7 +21,8 @@ class PdfExtractor:
                       file_path: str,
                       output_dir: str,
                       options: Optional[Dict[str, Any]] = None,
-                      progress_callback: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
+                      progress_callback: Optional[callable] = None,
+                      interrupt_check: Optional[callable] = None) -> Tuple[bool, str, List[str]]:
         """
         PDF dosyasından belirtilen sayfa aralıklarını çıkarır.
         
@@ -29,6 +31,7 @@ class PdfExtractor:
             output_dir: Çıktı klasörü
             options: Çıkarma seçenekleri (extract_all, page_range, file_prefix)
             progress_callback: İlerleme durumunu bildiren fonksiyon
+            interrupt_check: İşlem iptal edildi mi kontrol eden fonksiyon
             
         Returns:
             Tuple[bool, str, List[str]]: (Başarılı mı?, Mesaj, Oluşturulan dosyalar)
@@ -57,12 +60,22 @@ class PdfExtractor:
             pages_to_extract = []
             if extract_all:
                 for i in range(total_pages):
+                    # İptal kontrolü
+                    if interrupt_check and interrupt_check():
+                        pdf_document.close()
+                        return False, "İşlem kullanıcı tarafından iptal edildi.", []
+                    
                     pages_to_extract.append(i)
             else:
-                # Sayfa aralığını ayrıştır
-                parsed_ranges = self._parse_page_ranges(page_range_str, total_pages)
+                # Sayfa aralığını ayrıştır (merkezi fonksiyon kullan)
+                parsed_ranges = parse_page_ranges(page_range_str, total_pages)
                 for page_list in parsed_ranges:
                     for page_num in page_list:
+                        # İptal kontrolü
+                        if interrupt_check and interrupt_check():
+                            pdf_document.close()
+                            return False, "İşlem kullanıcı tarafından iptal edildi.", []
+                        
                         if 0 <= page_num < total_pages:
                             pages_to_extract.append(page_num)
                 pages_to_extract = sorted(list(set(pages_to_extract))) # Tekrarları kaldır ve sırala
@@ -73,6 +86,11 @@ class PdfExtractor:
 
             total_extracted = len(pages_to_extract)
             for i, page_idx in enumerate(pages_to_extract):
+                # İptal kontrolü
+                if interrupt_check and interrupt_check():
+                    pdf_document.close()
+                    return False, "İşlem kullanıcı tarafından iptal edildi.", output_files
+                
                 writer = PdfWriter()
                 writer.add_page(pdf_document.load_page(page_idx))
 
@@ -114,43 +132,6 @@ class PdfExtractor:
                 pdf_document.close()
             return False, error_msg, []
     
-    def _parse_page_ranges(self, range_text: str, total_pages: int) -> List[List[int]]:
-        """
-        Sayfa aralıkları metnini ayrıştırır ve sayfa listesi listesi döndürür.
-        Bu metod PdfSplitter'dan kopyalanmıştır.
-        """
-        result = []
-        if not range_text or range_text.strip() == "":
-            return result
-            
-        parts = range_text.split(",")
-        
-        for part in parts:
-            part = part.strip()
-            if "-" in part:
-                try:
-                    start, end = part.split("-", 1)
-                    start = int(start.strip())
-                    end = int(end.strip())
-                    
-                    start = max(1, start) - 1
-                    end = min(total_pages, end) - 1
-                    
-                    if start <= end:
-                        result.append(list(range(start, end + 1)))
-                except:
-                    continue
-            else:
-                try:
-                    page = int(part)
-                    page = max(1, page) - 1
-                    
-                    if 0 <= page < total_pages:
-                        result.append([page])
-                except:
-                    continue
-                    
-        return result
 
     def _cleanup_files(self, file_paths: List[str]):
         """Oluşturulan dosyaları temizler."""

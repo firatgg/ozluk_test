@@ -123,7 +123,6 @@ class PDFMergeWindow(QWidget):
         separator.setStyleSheet(SEPARATOR_STYLE)
         layout.addWidget(separator)
         
-        # Ana içerik - bölücü
         self.splitter = QSplitter(Qt.Orientation.Horizontal)
         
         # Sol panel - Dosya listesi
@@ -139,7 +138,7 @@ class PDFMergeWindow(QWidget):
         file_card_layout.setSpacing(15)
         
         # Dosya seçimi başlığı
-        files_header = QLabel("PDF Dosyaları")
+        files_header = QLabel("Dosya Seçimi")
         files_header.setStyleSheet(SECTION_TITLE_STYLE)
         file_card_layout.addWidget(files_header)
         
@@ -148,29 +147,82 @@ class PDFMergeWindow(QWidget):
         self.drag_drop.files_dropped.connect(self.add_files)
         file_card_layout.addWidget(self.drag_drop)
         
+        # Dosya işlemleri
+        file_actions = QHBoxLayout()
+        file_actions.setSpacing(10)
+        
         # Dosya ekleme düğmesi
-        add_file_btn = ModernButton("Dosya Ekle", primary=False)
-        add_file_btn.clicked.connect(self.select_files)
-        file_card_layout.addWidget(add_file_btn)
+        self.add_file_btn = ModernButton("Dosya Ekle", primary=False)
+        self.add_file_btn.clicked.connect(self.select_files)
+        self.add_file_btn.setMinimumWidth(120)
+        file_actions.addWidget(self.add_file_btn)
+        
+        # Dosya silme düğmesi
+        self.remove_file_btn = ModernButton("Seçili Dosyaları Kaldır", primary=False)
+        self.remove_file_btn.clicked.connect(self.remove_checked_files)
+        self.remove_file_btn.setMinimumWidth(170)
+        file_actions.addWidget(self.remove_file_btn)
+        
+        file_card_layout.addLayout(file_actions)
+        
+        # Seçim kontrolü
+        check_control = QHBoxLayout()
+        check_control.setContentsMargins(0, 5, 0, 5)
+        
+        # Tümünü seç/hiçbirini seçme
+        self.select_all_btn = ModernButton("Tümünü Seç", primary=False)
+        self.select_all_btn.clicked.connect(self.select_all_files)
+        self.select_all_btn.setMaximumWidth(100)
+        check_control.addWidget(self.select_all_btn)
+        
+        self.deselect_all_btn = ModernButton("Hiçbirini Seçme", primary=False)
+        self.deselect_all_btn.clicked.connect(self.deselect_all_files)
+        self.deselect_all_btn.setMaximumWidth(120)
+        check_control.addWidget(self.deselect_all_btn)
+        
+        check_control.addStretch()
+        file_card_layout.addLayout(check_control)
         
         # Dosya listesi
         file_list_label = QLabel("Birleştirilecek Dosyalar:")
         file_list_label.setStyleSheet(FORM_STYLE)
         file_card_layout.addWidget(file_list_label)
         
-        self.file_list = FileListWidget()
+        self.file_list = FileListWidget(selectable=True)  # Seçilebilir mod
         self.file_list.setStyleSheet(FILE_LIST_STYLE)
-        self.file_list.setMinimumHeight(500)  # Minimum yükseklik
-        self.file_list.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)  # Dikey olarak genişleyebilir
+        self.file_list.setMinimumHeight(400)  # PDF listesi için daha fazla alan
+        self.file_list.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.file_list.files_changed.connect(self.update_button_state)
-        # self.file_list.files_removed.connect(self.refocus_drag_drop) # Kaldırıldı
+        self.file_list.pdf_selected.connect(self.show_pdf_preview)
         file_card_layout.addWidget(self.file_list, 1)  # Stretch factor 1 ile ekle
         
         file_layout.addWidget(file_card, 1)  # Stretch factor 1 ile ekle
+
+        # Orta panel - PDF Önizleme
+        preview_panel = QWidget()
+        preview_layout = QVBoxLayout(preview_panel)
+        preview_layout.setContentsMargins(0, 0, 0, 0)
+        preview_layout.setSpacing(10)
         
+        # PDF Önizleme Başlığı
+        preview_header = QLabel("PDF Önizleme")
+        preview_header.setStyleSheet(SECTION_TITLE_STYLE)
+        preview_layout.addWidget(preview_header)
+        
+        # PDF Viewer widget'ı
+        from ..components import PdfViewer
+        self.pdf_viewer = PdfViewer()
+        self.pdf_viewer.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        preview_layout.addWidget(self.pdf_viewer, 1)
+
         # Sağ panel - çıktı ayarları
-        output_panel = QWidget()
-        output_layout = QVBoxLayout(output_panel)
+        right_panel = QScrollArea()
+        right_panel.setWidgetResizable(True)
+        right_panel.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        right_panel.setFrameShape(QFrame.Shape.NoFrame)
+
+        right_content = QWidget()
+        output_layout = QVBoxLayout(right_content)
         output_layout.setContentsMargins(0, 0, 0, 0)
         output_layout.setSpacing(15)
         
@@ -203,6 +255,8 @@ class PDFMergeWindow(QWidget):
         
         output_card_layout.addLayout(output_path_layout)
         
+        output_layout.addWidget(output_card)
+
         # Birleştirme düğmesi
         button_layout = QHBoxLayout()
         button_layout.addStretch()
@@ -213,7 +267,7 @@ class PDFMergeWindow(QWidget):
         self.merge_btn.clicked.connect(self.process_merge)
         button_layout.addWidget(self.merge_btn)
         
-        output_card_layout.addLayout(button_layout)
+        output_layout.addLayout(button_layout)
         
         # Durum kartı
         status_card = QWidget()
@@ -236,14 +290,16 @@ class PDFMergeWindow(QWidget):
         self.error_label.hide()
         status_layout.addWidget(self.error_label)
         
-        output_layout.addWidget(output_card)
         output_layout.addWidget(status_card)
         output_layout.addStretch()
-        
+
+        right_panel.setWidget(right_content)
+
         # Panelleri splitter'a ekle
         self.splitter.addWidget(file_panel)
-        self.splitter.addWidget(output_panel)
-        self.splitter.setSizes([700, 300])  # Panel boyutlarını ayarla - PDF listesi için daha fazla alan
+        self.splitter.addWidget(preview_panel)
+        self.splitter.addWidget(right_panel)
+        self.splitter.setSizes([300, 400, 300])  # Panel boyutlarını ayarla
         
         layout.addWidget(self.splitter, 1)  # stretch factör 1 ile ekle
         
@@ -439,6 +495,36 @@ class PDFMergeWindow(QWidget):
         
         # Buton durumunu güncelle
         self.update_button_state()
+
+    def show_pdf_preview(self, pdf_path: str):
+        """Seçilen PDF'i önizleme alanında göster."""
+        try:
+            print(f"PDF önizleme gösteriliyor: {pdf_path}")
+            self.pdf_viewer.load_pdf(pdf_path)
+        except Exception as e:
+            print(f"PDF önizleme hatası: {e}")
+
+    def remove_checked_files(self):
+        """Seçili dosyaları kaldır."""
+        try:
+            self.file_list.remove_checked_files()
+            self.update_button_state()
+        except Exception as e:
+            self.handle_error(f"Dosya kaldırılırken hata oluştu: {str(e)}")
+            
+    def select_all_files(self):
+        """Tüm dosyaları seç."""
+        try:
+            self.file_list.select_all()
+        except Exception as e:
+            print(f"Tümünü seçerken hata: {e}")
+            
+    def deselect_all_files(self):
+        """Hiçbir dosyayı seçme."""
+        try:
+            self.file_list.deselect_all()
+        except Exception as e:
+            print(f"Hiçbirini seçmezken hata: {e}")
 
     def update_button_state(self):
         """Düğme durumunu günceller."""

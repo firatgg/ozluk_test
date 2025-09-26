@@ -51,6 +51,31 @@ class TestPdfMerger:
         
         assert not success
         assert len(output_files) == 0
+    
+    def test_merge_real_pdfs(self):
+        """Gerçek PDF dosyaları ile birleştirme testi."""
+        # Test varlıklarından dosyaları al
+        sample_1_page = os.path.join("tests", "assets", "sample_1_page.pdf")
+        sample_3_pages = os.path.join("tests", "assets", "sample_3_pages.pdf")
+        
+        # Dosyaların varlığını kontrol et
+        if not os.path.exists(sample_1_page) or not os.path.exists(sample_3_pages):
+            pytest.skip("Test PDF dosyaları bulunamadı")
+        
+        output_path = os.path.join(self.temp_dir, "merged_output.pdf")
+        files = [sample_1_page, sample_3_pages]
+        
+        success, message, output_files = self.merger.merge_pdfs(files, output_path)
+        
+        assert success, f"Birleştirme başarısız: {message}"
+        assert len(output_files) == 1
+        assert os.path.exists(output_files[0])
+        
+        # Birleştirilmiş PDF'in 4 sayfa olduğunu kontrol et (1 + 3)
+        import fitz
+        merged_doc = fitz.open(output_files[0])
+        assert len(merged_doc) == 4, f"Beklenen 4 sayfa, bulunan: {len(merged_doc)}"
+        merged_doc.close()
 
 
 class TestPdfSplitter:
@@ -79,6 +104,23 @@ class TestPdfSplitter:
         
         assert not success
         assert len(output_files) == 0
+    
+    def test_split_all_pages(self):
+        """3 sayfalık PDF'i tüm sayfaları böl moduyla bölme testi."""
+        sample_3_pages = os.path.join("tests", "assets", "sample_3_pages.pdf")
+        
+        if not os.path.exists(sample_3_pages):
+            pytest.skip("Test PDF dosyası bulunamadı")
+        
+        options = {"mode": self.splitter.SPLIT_MODE_ALL_PAGES}
+        success, message, output_files = self.splitter.split_pdf(sample_3_pages, self.temp_dir, options)
+        
+        assert success, f"Bölme başarısız: {message}"
+        assert len(output_files) == 3, f"Beklenen 3 dosya, bulunan: {len(output_files)}"
+        
+        # Tüm çıktı dosyalarının varlığını kontrol et
+        for output_file in output_files:
+            assert os.path.exists(output_file), f"Çıktı dosyası bulunamadı: {output_file}"
 
 
 class TestPdfRenamer:
@@ -118,6 +160,25 @@ class TestPdfRenamer:
         assert not success
         assert "yeni dosya adı" in message.lower()
         assert len(output_files) == 0
+    
+    def test_rename_real_pdf(self):
+        """Gerçek PDF dosyası ile yeniden adlandırma testi."""
+        sample_1_page = os.path.join("tests", "assets", "sample_1_page.pdf")
+        
+        if not os.path.exists(sample_1_page):
+            pytest.skip("Test PDF dosyası bulunamadı")
+        
+        options = {"new_name": "yeni_isim"}
+        success, message, output_files = self.renamer.rename_pdfs([sample_1_page], self.temp_dir, options)
+        
+        assert success, f"Yeniden adlandırma başarısız: {message}"
+        assert len(output_files) == 1
+        assert os.path.exists(output_files[0])
+        
+        # Dosya adının doğru olduğunu kontrol et
+        expected_filename = "yeni_isim_1.pdf"
+        actual_filename = os.path.basename(output_files[0])
+        assert actual_filename == expected_filename, f"Beklenen: {expected_filename}, Bulunan: {actual_filename}"
 
 
 class TestPdfExtractor:
@@ -146,6 +207,28 @@ class TestPdfExtractor:
         
         assert not success
         assert len(output_files) == 0
+    
+    def test_extract_specific_pages(self):
+        """3 sayfalık PDF'den belirli sayfaları çıkarma testi."""
+        sample_3_pages = os.path.join("tests", "assets", "sample_3_pages.pdf")
+        
+        if not os.path.exists(sample_3_pages):
+            pytest.skip("Test PDF dosyası bulunamadı")
+        
+        options = {
+            "extract_all": False,
+            "page_range": "1,3",
+            "file_prefix": "test_"
+        }
+        
+        success, message, output_files = self.extractor.extract_pages(sample_3_pages, self.temp_dir, options)
+        
+        assert success, f"Sayfa çıkarma başarısız: {message}"
+        assert len(output_files) == 2, f"Beklenen 2 dosya, bulunan: {len(output_files)}"
+        
+        # Tüm çıktı dosyalarının varlığını kontrol et
+        for output_file in output_files:
+            assert os.path.exists(output_file), f"Çıktı dosyası bulunamadı: {output_file}"
 
 
 class TestCoreIntegration:

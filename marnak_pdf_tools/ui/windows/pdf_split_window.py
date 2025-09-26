@@ -16,7 +16,7 @@ import os
 from ..components import (
     ModernButton, ModernLineEdit, DragDropWidget,
     FileListWidget, ModernProgressBar, HeaderLabel,
-    InfoLabel, ErrorLabel
+    InfoLabel, ErrorLabel, PdfViewer
 )
 from ...services.pdf_service import PdfService
 from ..styles import (
@@ -217,6 +217,7 @@ class PDFSplitWindow(QWidget):
         self.file_list.files_changed.connect(self.update_file_count)
         # self.file_list.files_removed.connect(self.refocus_drag_drop) # Kaldırıldı
         self.file_list.itemChanged.connect(self.check_item_state)
+        self.file_list.itemSelectionChanged.connect(self.on_file_selection_changed)
         file_layout.addWidget(self.file_list)
         
         left_layout.addWidget(file_card)
@@ -430,10 +431,26 @@ class PDFSplitWindow(QWidget):
         # Scroll alanını ayarla
         right_panel.setWidget(right_content)
         
+        # PDF önizleme paneli
+        preview_panel = QWidget()
+        preview_layout = QVBoxLayout(preview_panel)
+        preview_layout.setContentsMargins(0, 0, 0, 0)
+        preview_layout.setSpacing(10)
+        
+        # PDF önizleme başlığı
+        preview_header = QLabel(self.tr("PDF Önizleme"))
+        preview_header.setStyleSheet(SECTION_TITLE_STYLE)
+        preview_layout.addWidget(preview_header)
+        
+        # PDF viewer
+        self.pdf_viewer = PdfViewer()
+        preview_layout.addWidget(self.pdf_viewer)
+        
         # Panelleri splitter'a ekle
         self.splitter.addWidget(left_panel)
+        self.splitter.addWidget(preview_panel)
         self.splitter.addWidget(right_panel)
-        self.splitter.setSizes([400, 500])  # Panel boyutlarını ayarla - PDF listesi için daha fazla alan
+        self.splitter.setSizes([300, 400, 300])  # Panel boyutlarını ayarla
         
         main_layout.addWidget(self.splitter, 1)  # 1 stretch factor ile ekle
         
@@ -903,4 +920,20 @@ class PDFSplitWindow(QWidget):
     def check_item_state(self, item):
         """Öğe işaretlendiğinde/işaret kaldırıldığında güncelle"""
         # Öğe değişikliklerini sadece dinle, "Tümünü Seç" durumunu güncelle
-        self.update_file_count() 
+        self.update_file_count()
+    
+    def on_file_selection_changed(self):
+        """Dosya seçimi değiştiğinde PDF önizlemesini güncelle."""
+        try:
+            current_item = self.file_list.currentItem()
+            if current_item:
+                file_path = current_item.data(Qt.ItemDataRole.UserRole)
+                if file_path and os.path.exists(file_path):
+                    self.pdf_viewer.load_pdf(file_path)
+                else:
+                    self.pdf_viewer.clear()
+            else:
+                self.pdf_viewer.clear()
+        except Exception as e:
+            print(f"PDF önizleme güncellenirken hata: {e}")
+            self.pdf_viewer.clear() 
